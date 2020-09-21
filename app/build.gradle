@@ -19,8 +19,15 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    buildFeatures {
+        viewBinding true
     }
 
     buildTypes {
@@ -40,7 +47,35 @@ dependencies {
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    implementation "com.google.dagger:hilt-android:2.28-alpha"
-    kapt "com.google.dagger:hilt-android-compiler:2.28-alpha"
 
+    //Hilt
+    implementation "com.google.dagger:hilt-android:$rootProject.hilt_version"
+    kapt "com.google.dagger:hilt-android-compiler:$rootProject.hilt_version"
+
+    //Hilt ViewModel
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$rootProject.hilt_viewmodel_version"
+    kapt "androidx.hilt:hilt-compiler:$rootProject.hilt_viewmodel_version"
+
+    // ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$rootProject.lifecycle_version"
+
+    // LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata:$rootProject.lifecycle_version"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofit_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
+
+    // RxAndroid
+    implementation "io.reactivex.rxjava3:rxandroid:$rootProject.rx_android_version"
+
+    // RxJava
+    implementation "io.reactivex.rxjava3:rxjava:$rootProject.rx_java_version"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    // Retrofit to RxJava CallAdapter Factory
+    implementation "com.squareup.retrofit2:adapter-rxjava3:$rootProject.retrofit_version"
+
+    implementation "androidx.fragment:fragment-ktx:1.2.5"
 }
