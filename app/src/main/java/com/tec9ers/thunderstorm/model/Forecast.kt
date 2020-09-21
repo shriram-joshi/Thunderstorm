@@ -1,21 +1,17 @@
 package com.tec9ers.thunderstorm.model
 
 import com.google.gson.annotations.SerializedName
-import com.tec9ers.thunderstorm.CurrentWeatherMain
 
+data class Forecast (
 
-data class CurrentWeatherResponse (
     @SerializedName("coord")
     var coord: Coord?,
 
     @SerializedName("weather")
     var weather: List<Weather>?,
 
-    @SerializedName("base")
-    var base: String?,
-
     @SerializedName("main")
-    var main: CurrentWeatherMain?,
+    var main: ForecastMain?,
 
     @SerializedName("visibility")
     var visibility: Long,
@@ -30,18 +26,12 @@ data class CurrentWeatherResponse (
     var dt: Long,
 
     @SerializedName("sys")
-    var sys: CurrentWeatherSys?,
+    var sys: ForecastSys?,
 
-    @SerializedName("id")
-    var id: Long,
 
-    @SerializedName("name")
-    var name: String?,
+    @SerializedName("pop")
+    val pop: Double ,
 
-    @SerializedName("cod")
-    var cod: Long ,
-
-    @SerializedName("timezone")
-    var timezone: Long
-
+    @SerializedName("dt_text")
+    val datetxt: String?
 )
