@@ -5,6 +5,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.tec9ers.thunderstorm.data.QueryParams
 import com.tec9ers.thunderstorm.data.Repository
 import com.tec9ers.thunderstorm.model.CurrentWeatherResponse
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -25,7 +26,7 @@ class HomeViewModel @ViewModelInject constructor (private val repository: Reposi
     }
 
     private fun fetchWeatherLiveData(){
-        repository.getCurrentWeatherSingle("pune").subscribeOn(Schedulers.newThread())
+        repository.getCurrentWeatherSingle(QueryParams().getresponsebycity("pune")).subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : SingleObserver<CurrentWeatherResponse> {
 
