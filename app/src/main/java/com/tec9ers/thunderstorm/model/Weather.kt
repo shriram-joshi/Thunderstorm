@@ -1,22 +1,10 @@
 package com.tec9ers.thunderstorm.model
 
-import com.google.gson.annotations.Expose
-
 import com.google.gson.annotations.SerializedName
 
-
-
-
-class Weather (
-    @SerializedName("id")
-    var id: Long ,
-
-    @SerializedName("main")
-    var main: String? ,
-
-    @SerializedName("description")
-    var description: String? ,
-
-    @SerializedName("icon")
-    var icon: String?
+data class Weather (
+    @SerializedName("id") val id : Long,
+    @SerializedName("main") val main : String?,
+    @SerializedName("description") val description : String?,
+    @SerializedName("icon") val icon : String?
 )

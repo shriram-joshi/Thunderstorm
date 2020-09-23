@@ -1,26 +1,12 @@
-package com.tec9ers.thunderstorm
-
-import com.google.gson.annotations.Expose
+package com.tec9ers.thunderstorm.model
 
 import com.google.gson.annotations.SerializedName
 
-
-
-
  data class CurrentWeatherMain (
-  @SerializedName("temp")
-  var temp: Float ,
-
-  @SerializedName("pressure")
-  var pressure: Long ,
-
-  @SerializedName("humidity")
-  var humidity: Long ,
-
-  @SerializedName("temp_min")
-  var tempMin: Float ,
-
-  @SerializedName("temp_max")
-  var tempMax: Float
-
+  
+  @SerializedName("temp") val temp : Float,
+  @SerializedName("pressure") val pressure : Long ,
+  @SerializedName("humidity") val humidity : Long ,
+  @SerializedName("temp_min") val tempMin : Float ,
+  @SerializedName("temp_max") val tempMax : Float
 )

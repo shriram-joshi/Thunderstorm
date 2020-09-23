@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import com.tec9ers.thunderstorm.data.QueryParams
 import com.tec9ers.thunderstorm.data.Repository
 import com.tec9ers.thunderstorm.model.CurrentWeatherResponse
+import com.tec9ers.thunderstorm.model.onecallapi.OneCallAPIResponse
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.SingleObserver
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -19,14 +20,15 @@ class HomeViewModel @ViewModelInject constructor (private val repository: Reposi
     private val currentWeatherLiveData: MutableLiveData<CurrentWeatherResponse> = MutableLiveData()
     private val compositeDisposable :CompositeDisposable = CompositeDisposable()
 
-    fun currentWeatherLiveData(): LiveData<CurrentWeatherResponse>{
+    fun currentWeatherLiveData(): LiveData<CurrentWeatherResponse> {
         if (currentWeatherLiveData.value == null)
             fetchWeatherLiveData()
         return currentWeatherLiveData
     }
 
-    private fun fetchWeatherLiveData(){
-        repository.getCurrentWeatherSingle(QueryParams().getresponsebycity("pune")).subscribeOn(Schedulers.newThread())
+    private fun fetchWeatherLiveData() {
+        repository.getCurrentWeatherSingle(QueryParams().getresponsebycity("pune"))
+            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : SingleObserver<CurrentWeatherResponse> {
 

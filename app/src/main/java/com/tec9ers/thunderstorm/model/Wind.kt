@@ -1,16 +1,8 @@
 package com.tec9ers.thunderstorm.model
 
-import com.google.gson.annotations.Expose
-
 import com.google.gson.annotations.SerializedName
 
-
-
-
 data class Wind (
-    @SerializedName("speed")
-    var speed: Float ,
-
-    @SerializedName("deg")
-    var deg: Long
+    @SerializedName("speed") val speed: Float,
+    @SerializedName("deg") val deg : Long
 )

@@ -8,13 +8,13 @@ import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
 
-class Repository @Inject constructor (private val apiService: ApiService){
+class Repository @Inject constructor (private val apiService : ApiService) {
 
-    fun getCurrentWeatherSingle(queryParams : QueryParams): Single<CurrentWeatherResponse> {
+    fun getCurrentWeatherSingle(queryParams : QueryParams) : Single<CurrentWeatherResponse> {
         return apiService.getCurrentWeather(queryParams.Params)
     }
 
-    fun getForecastSingle(queryParams : QueryParams): Single<ForecastResponse> {
+    fun getForecastSingle(queryParams : QueryParams) : Single<ForecastResponse> {
         return apiService.getForecast(queryParams.Params)
     }
 }

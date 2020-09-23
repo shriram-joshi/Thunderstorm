@@ -8,7 +8,7 @@ import dagger.hilt.android.components.ApplicationComponent
 import retrofit2.Retrofit
 import javax.inject.Singleton
 
-//TODO Install this is ActivityExtenedScope
+// TODO Install this is ActivityExtendedScope
 
 @Module
 @InstallIn(ApplicationComponent::class)

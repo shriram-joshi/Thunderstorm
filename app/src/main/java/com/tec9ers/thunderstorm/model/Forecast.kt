@@ -4,34 +4,14 @@ import com.google.gson.annotations.SerializedName
 
 data class Forecast (
 
-    @SerializedName("coord")
-    var coord: Coord?,
-
-    @SerializedName("weather")
-    var weather: List<Weather>?,
-
-    @SerializedName("main")
-    var main: ForecastMain?,
-
-    @SerializedName("visibility")
-    var visibility: Long,
-
-    @SerializedName("wind")
-    var wind: Wind?,
-
-    @SerializedName("clouds")
-    var clouds: Clouds?,
-
-    @SerializedName("dt")
-    var dt: Long,
-
-    @SerializedName("sys")
-    var sys: ForecastSys?,
-
-
-    @SerializedName("pop")
-    val pop: Double ,
-
-    @SerializedName("dt_text")
-    val datetxt: String?
+    @SerializedName("coord") val coord : Coord?,
+    @SerializedName("weather") val weather : List<Weather>?,
+    @SerializedName("main") val main : ForecastMain?,
+    @SerializedName("visibility") val visibility : Long,
+    @SerializedName("wind") val wind : Wind?,
+    @SerializedName("clouds") val clouds : Clouds?,
+    @SerializedName("dt") val dt : Long,
+    @SerializedName("sys") val sys : ForecastSys?,
+    @SerializedName("pop") val pop : Double,
+    @SerializedName("dt_text") val datetxt : String?
 )
