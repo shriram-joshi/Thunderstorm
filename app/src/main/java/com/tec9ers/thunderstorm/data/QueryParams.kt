@@ -2,24 +2,24 @@ package com.tec9ers.thunderstorm.data
 
 class QueryParams {
 
-    lateinit var Params: HashMap<String,String>
+    lateinit var params: HashMap<String,String>
 
-    fun getresponsebycity(city: String ): QueryParams {
-        this.Params = hashMapOf("q" to city)
+    fun getResponseByCity(city : String ) : QueryParams {
+        this.params = hashMapOf("q" to city)
         return this
     }
 
-    fun getresponsebylatlng(lat: Double , lng: Double ): QueryParams {
-        this.Params = hashMapOf("lat" to lat.toString() , "lon" to lng.toString())
+    fun getResponseByCoordinates(lat : Double, lng : Double ) : QueryParams {
+        this.params = hashMapOf("lat" to lat.toString() , "lon" to lng.toString())
         return this
     }
 
-    fun getresponsebyzipcode(zipcode: Long ): QueryParams {
-        this.Params = hashMapOf("zip" to zipcode.toString())
+    fun getResponseByZipCode(zipCode : Long ) : QueryParams {
+        this.params = hashMapOf("zip" to zipCode.toString())
         return this
     }
-    fun getresponsebycityid(cityid: Long): QueryParams {
-        this.Params = hashMapOf("id" to cityid.toString())
+    fun getResponseById(cityId : Long) : QueryParams {
+        this.params = hashMapOf("id" to cityId.toString())
         return this
     }
 
