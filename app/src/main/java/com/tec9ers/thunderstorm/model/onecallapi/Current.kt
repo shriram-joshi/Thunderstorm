@@ -1,6 +1,7 @@
 package com.tec9ers.thunderstorm.model.onecallapi
 
 import com.google.gson.annotations.SerializedName
+import com.tec9ers.thunderstorm.model.Weather
 
 data class Current (
 

@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class Weather (
 
     @SerializedName("id")
-    val id : Long,
+    val id : Int,
 
     @SerializedName("main")
     val main : String,
