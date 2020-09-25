@@ -1,47 +1,45 @@
 package com.tec9ers.thunderstorm.model
 
 import com.google.gson.annotations.SerializedName
-import com.tec9ers.thunderstorm.CurrentWeatherMain
-
 
 data class CurrentWeatherResponse (
+    
     @SerializedName("coord")
-    var coord: Coord?,
+    val coord : Coord,
 
     @SerializedName("weather")
-    var weather: List<Weather>?,
+    val weather : List<Weather>,
 
     @SerializedName("base")
-    var base: String?,
+    val base : String,
 
     @SerializedName("main")
-    var main: CurrentWeatherMain?,
+    val main : CurrentWeatherMain,
 
     @SerializedName("visibility")
-    var visibility: Long,
+    val visibility : Long,
 
     @SerializedName("wind")
-    var wind: Wind?,
+    val wind : Wind,
 
     @SerializedName("clouds")
-    var clouds: Clouds?,
+    val clouds : Clouds,
 
     @SerializedName("dt")
-    var dt: Long,
+    val dt : Long,
 
     @SerializedName("sys")
-    var sys: CurrentWeatherSys?,
+    val sys : CurrentWeatherSys,
 
     @SerializedName("id")
-    var id: Long,
+    val id : Long,
 
     @SerializedName("name")
-    var name: String?,
+    val name : String,
 
     @SerializedName("cod")
-    var cod: Long ,
+    val cod : Long,
 
     @SerializedName("timezone")
-    var timezone: Long
-
+    val timezone : Long
 )

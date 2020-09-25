@@ -2,24 +2,24 @@ package com.tec9ers.thunderstorm.model
 
 import com.google.gson.annotations.SerializedName
 
-data class ForecastMain(
+data class ForecastMain (
+
     @SerializedName("temp")
-    var temp: Float ,
+    val temp : Float,
 
     @SerializedName("pressure")
-    var pressure: Long ,
+    val pressure : Long,
 
     @SerializedName("humidity")
-    var humidity: Long ,
+    val humidity : Long,
 
     @SerializedName("temp_min")
-    var tempMin: Float ,
+    val tempMin : Float,
 
     @SerializedName("temp_max")
-    var tempMax: Float ,
+    val tempMax : Float,
 
     @SerializedName("temp_kf")
-    var tempKF: Float
-
+    val tempKF : Float
 )
 

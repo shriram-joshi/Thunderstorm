@@ -3,6 +3,7 @@ package com.tec9ers.thunderstorm.model
 import com.google.gson.annotations.SerializedName
 
 data class ForecastResponse (
+
     @SerializedName("cod")
     val cod : Int,
 
@@ -13,9 +14,8 @@ data class ForecastResponse (
     val cnt : Int,
 
     @SerializedName("city")
-    val city: City,
+    val city : City,
 
     @SerializedName("list")
-    val Forecastlists: List<Forecast>
-
+    val forecastList : List<Forecast>
 )

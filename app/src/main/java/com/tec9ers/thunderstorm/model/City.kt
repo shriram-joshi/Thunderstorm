@@ -1,34 +1,31 @@
 package com.tec9ers.thunderstorm.model
 
-import com.google.gson.annotations.Expose
-
 import com.google.gson.annotations.SerializedName
 
+data class City (
 
-
-
-data class City(
     @SerializedName("id")
-                val id: Int,
+    val id : Int,
 
     @SerializedName("name")
-val name: String? ,
+    val name : String,
 
-@SerializedName("coord")
-val coord: Coord? ,
+    @SerializedName("coord")
+    val coord : Coord,
 
-@SerializedName("country")
-val country: String? ,
+    @SerializedName("country")
+    val country : String,
 
-@SerializedName("population")
-val population :Int,
+    @SerializedName("population")
+    val population : Int,
 
-@SerializedName("timezone")
-val timezone :Int,
+    @SerializedName("timezone")
+    val timezone : Int,
 
-@SerializedName("sunrise")
-val sunrise : Int,
+    @SerializedName("sunrise")
+    val sunrise : Int,
 
-@SerializedName("sunset")
-val sunset : Int)
+    @SerializedName("sunset")
+    val sunset : Int
+)
 
