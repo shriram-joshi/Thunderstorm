@@ -15,20 +15,11 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    val TAG = "lollo"
-    @Inject
-    lateinit var retrofit : Retrofit
-    private val viewModel : HomeViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        viewModel.currentWeatherLiveData()
-         .observe(this, { response -> Log.d(TAG, "onCreate: " + response.name) })
 
-        api_test_btn.setOnClickListener {
-            viewModel.oneCallAPIData()
-            .observe(this as LifecycleOwner, { response -> Log.d("OneCall", response.timezone) })
-        }
     }
 }

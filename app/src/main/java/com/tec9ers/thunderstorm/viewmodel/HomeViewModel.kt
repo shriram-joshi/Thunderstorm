@@ -15,19 +15,20 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 
-class HomeViewModel @ViewModelInject constructor (private val repository: Repository) : ViewModel(){
+class HomeViewModel @ViewModelInject constructor(private val repository: Repository) : ViewModel() {
 
-    private val currentWeatherLiveData: MutableLiveData<CurrentWeatherResponse> = MutableLiveData()
-    private val oneCallApiLiveData: MutableLiveData<OneCallAPIResponse> = MutableLiveData()
-    private val compositeDisposable :CompositeDisposable = CompositeDisposable()
-
-    fun currentWeatherLiveData(): LiveData<CurrentWeatherResponse> {
-        if (currentWeatherLiveData.value == null)
-            fetchWeatherLiveData()
-        return currentWeatherLiveData
+    val oneCallApiLiveData: MutableLiveData<OneCallAPIResponse> by lazy {
+        MutableLiveData<OneCallAPIResponse>().also {
+            fetchOneCallAPIData()
+        }
     }
 
-    fun oneCallAPIData() : LiveData<OneCallAPIResponse> {
+    private val compositeDisposable: CompositeDisposable = CompositeDisposable()
+
+    //val oneCallApiLiveData: LiveData<OneCallAPIResponse>
+    //get() = _oneCallApiLiveData
+
+    private fun fetchOneCallAPIData() {
         repository.getOneCallApiDataSingle(QueryParams().getResponseByCoordinates(18.558, 73.804))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -36,32 +37,12 @@ class HomeViewModel @ViewModelInject constructor (private val repository: Reposi
                     compositeDisposable.add(d)
                 }
 
-                override fun onSuccess(t: OneCallAPIResponse?) {
-                    oneCallApiLiveData.postValue(t)
+                override fun onSuccess(oneCallAPIResponse: OneCallAPIResponse?) {
+                    oneCallApiLiveData.value = oneCallAPIResponse
                 }
 
                 override fun onError(e: Throwable?) {
                     Log.d("OneCallAPI", "Failed: " + e.toString())
-                }
-            })
-        return oneCallApiLiveData
-    }
-
-    private fun fetchWeatherLiveData() {
-        repository.getCurrentWeatherSingle(QueryParams().getResponseByCity("pune"))
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : SingleObserver<CurrentWeatherResponse> {
-                override fun onSubscribe(d: Disposable?) {
-                    compositeDisposable.add(d)
-                }
-
-                override fun onSuccess(t: CurrentWeatherResponse?) {
-                    currentWeatherLiveData.postValue(t)
-                }
-
-                override fun onError(e: Throwable?) {
-                    Log.d("lollo", "onError: " + e.toString())
                 }
             })
     }

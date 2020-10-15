@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Thunderstorm</string>
     <string name="one_call_test">OneCallTest</string>
+    <string name="feels_like">Feels Like</string>
+    <string name="temp">% .2f˚C</string>
+    <string name="wind_speed">% .2f km/h</string>
 </resources>
