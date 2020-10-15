@@ -9,14 +9,34 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_wind_speed"
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
             android:layout_weight="0.3"
-            android:gravity="center"
-            android:text="20 km/h" />
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_sun_rise"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="7:52"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_sun_set"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="6:35"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_wind_speed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="20 km/h" />
+        </LinearLayout>
 
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
