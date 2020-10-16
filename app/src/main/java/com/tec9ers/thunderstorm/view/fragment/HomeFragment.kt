@@ -21,6 +21,8 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
     private val homeViewModel: HomeViewModel by viewModels()
+    @Inject
+    lateinit var formatUtils :FormatUtils
 
     @Inject
     lateinit var formatUtils: FormatUtils
