@@ -36,6 +36,10 @@ class HomeFragment : Fragment() {
                         tv_weather_condition.text = current.weather[0].description
                         tv_sun_rise.text = formatTime(current.sunrise)
                         tv_sun_set.text = formatTime(current.sunset)
+                        tv_uv_index.text = formatUVI(current.uvi)
+                        tv_pressure.text  = formatPressure(current.pressure)
+                        tv_humidity.text  = formatHumidity(current.humidity)
+                        tv_visibility.text = formatVisibility(current.visibility)
                     }
                 }
 

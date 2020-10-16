@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="10dp">
 
     <LinearLayout
@@ -21,14 +22,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="7:52"/>
+                android:text="7:52" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_sun_set"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="6:35"/>
+                android:text="6:35" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_wind_speed"
@@ -97,5 +98,49 @@
         </androidx.cardview.widget.CardView>
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_pressure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pressure" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_humidity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/humidity" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_visibility"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/visibility" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_uv_index"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/uv_index" />
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>
