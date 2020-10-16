@@ -9,10 +9,10 @@ data class Current (
 	val dt : Int,
 
 	@SerializedName("sunrise")
-	val sunrise : Int,
+	val sunrise : Long,
 
 	@SerializedName("sunset")
-	val sunset : Int,
+	val sunset : Long,
 
 	@SerializedName("temp")
 	val temp : Double,
