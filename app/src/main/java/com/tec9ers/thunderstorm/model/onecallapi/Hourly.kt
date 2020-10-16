@@ -6,7 +6,7 @@ import com.tec9ers.thunderstorm.model.Weather
 data class Hourly (
 
 	@SerializedName("dt")
-	val dt : Int,
+	val dt : Long,
 
 	@SerializedName("temp")
 	val temp : Double,
