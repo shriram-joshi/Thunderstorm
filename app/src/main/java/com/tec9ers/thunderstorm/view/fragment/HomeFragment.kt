@@ -13,10 +13,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_home.*
 import javax.inject.Inject
 
+
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
     private val homeViewModel: HomeViewModel by viewModels()
-
     @Inject
     lateinit var formatUtils :FormatUtils
 
@@ -46,5 +46,25 @@ class HomeFragment : Fragment() {
             })
 
         return inflater.inflate(R.layout.fragment_home, container, false)
+    }
+
+    private fun formatTemp(temp: Double): String {
+        return getString(R.string.temp, temp)
+    }
+
+    private fun formatWindSpeed(windSpeed: Double, direction: Int): String {
+        val dir = when (direction / 45) {
+            0 -> "N"
+            1 -> "NE"
+            2 -> "E"
+            3 -> "SE"
+            4 -> "S"
+            5 -> "SW"
+            6 -> "W"
+            7 -> "NW"
+            17 -> "N"
+            else -> ""
+        }
+        return getString(R.string.wind_speed, windSpeed) + " " + dir
     }
 }
