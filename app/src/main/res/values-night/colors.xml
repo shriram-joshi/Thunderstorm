@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="background">@color/eerie_black</color>
+    <color name="main_card_background">@color/space_cadet</color>
+    <color name="wind_speed_tv_background">@color/ivory</color>
+    <color name="location_tv_background">@color/honeydew</color>
+    <color name="other_card_background">@color/glaucous</color>
+    <color name="tile_background">@color/space_cadet</color>
+    <color name="standard_text">@color/honeydew</color>
+    <color name="inverted_text">@color/space_cadet</color>
+    <color name="status_bar">@color/glaucous</color>
+</resources>

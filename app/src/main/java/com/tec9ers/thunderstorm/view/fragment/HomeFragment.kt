@@ -1,12 +1,15 @@
 package com.tec9ers.thunderstorm.view.fragment
 
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tec9ers.thunderstorm.R
 import com.tec9ers.thunderstorm.model.onecallapi.OneCallAPIResponse
@@ -28,9 +31,27 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        rv_today_forecast.adapter = hourlyForecastRecyclerViewAdapter
-        rv_today_forecast.layoutManager =
+
+        // Invert the gradient for the title textview (instead of creating a new drawable)
+        var gradientDrawable: GradientDrawable = ContextCompat.getDrawable(requireContext(),
+            R.drawable.hourly_forecast) as GradientDrawable
+        gradientDrawable = gradientDrawable.mutate() as GradientDrawable
+        gradientDrawable.orientation = GradientDrawable.Orientation.BOTTOM_TOP
+        hourly_forecast_title_tv.background = gradientDrawable
+
+        // To prevent clipping of content across linearlayout rounded corners
+        hourly_forecast_layout.clipToOutline = true
+
+        hourly_forecast_rv.adapter = hourlyForecastRecyclerViewAdapter
+        hourly_forecast_rv.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        hourly_forecast_rv.addItemDecoration(DividerItemDecoration(context,
+            LinearLayoutManager.HORIZONTAL))
+
+        daily_forecast_rv.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        hourly_forecast_rv.addItemDecoration(DividerItemDecoration(context,
+            LinearLayoutManager.HORIZONTAL))
     }
 
     override fun onCreateView(
@@ -43,26 +64,6 @@ class HomeFragment : Fragment() {
         }
 
         return inflater.inflate(R.layout.fragment_home, container, false)
-    }
-
-    private fun formatTemp(temp: Double): String {
-        return getString(R.string.temp, temp)
-    }
-
-    private fun formatWindSpeed(windSpeed: Double, direction: Int): String {
-        val dir = when (direction / 45) {
-            0 -> "N"
-            1 -> "NE"
-            2 -> "E"
-            3 -> "SE"
-            4 -> "S"
-            5 -> "SW"
-            6 -> "W"
-            7 -> "NW"
-            17 -> "N"
-            else -> ""
-        }
-        return getString(R.string.wind_speed, windSpeed) + " " + dir
     }
 
     private fun setData(oneCallAPIResponse: OneCallAPIResponse) {

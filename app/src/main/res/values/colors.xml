@@ -3,4 +3,32 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+
+<!--    Theme colors-->
+    <color name="honeydew">#DFF3E4</color>
+    <color name="space_cadet">#171738</color>
+    <color name="midnight_blue">#2E1760</color>
+    <color name="blue_pantone">#3423A6</color>
+    <color name="glaucous">#7180B9</color>
+    <color name="ivory">#EAF2E3</color>
+    <color name="eerie_black">#141414</color>
+    <color name="tart_orange">#F25757</color>
+    <color name="corn">#F2E863</color>
+    <color name="orange_yellow_crayola">#F2CD60</color>
+    <color name="maize_crayola">#F2C94C</color>
+    <color name="salmon">#ED8069</color>
+    <color name="salsa">#EB5757</color>
+    <color name="sandy_brown">#F2994A</color>
+    <color name="lavender_web">#DCD6F7</color>
+    
+    <color name="background">@color/lavender_web</color>
+    <color name="main_card_background">@color/ivory</color>
+    <color name="wind_speed_tv_background">@color/space_cadet</color>
+    <color name="location_tv_background">@color/glaucous</color>
+    <color name="other_card_background">@color/glaucous</color>
+    <color name="tile_background">@color/honeydew</color>
+    <color name="standard_text">@color/eerie_black</color>
+    <color name="inverted_text">@color/ivory</color>
+    <color name="status_bar">@color/space_cadet</color>
+
 </resources>

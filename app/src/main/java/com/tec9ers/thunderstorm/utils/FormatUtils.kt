@@ -1,13 +1,11 @@
 package com.tec9ers.thunderstorm.utils
 
-import android.annotation.SuppressLint
 import android.content.Context
 import com.tec9ers.thunderstorm.R
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ActivityScoped
-import java.text.DateFormat
-import java.text.SimpleDateFormat
-import java.util.*
+import java.time.*
+import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 @ActivityScoped
@@ -34,14 +32,16 @@ class FormatUtils @Inject constructor(@ApplicationContext val context: Context) 
     }
 
     fun formatTime(time: Long): String {
-        val date = Date(time * 1000)
-        val format = DateFormat.getTimeInstance()
-        return format.format(date)
+        val utcDateTime = LocalDateTime.ofEpochSecond(time, 0, ZoneOffset.UTC)
+        val zonedDateTime = ZonedDateTime.of(utcDateTime, ZoneOffset.UTC).withZoneSameInstant(
+            ZoneId.systemDefault())
+        val format = DateTimeFormatter.ofPattern("HH:mm")
+        return format.format(zonedDateTime)
     }
 
     fun formatPressure(pressure: Int): String {
-        val atm = pressure*0.000987
-        return (context.getString(R.string.pressure,atm))
+        val bar = pressure.toFloat()/1000
+        return (context.getString(R.string.pressure, bar))
     }
 
     fun formatVisibility(visibility : Int): String {

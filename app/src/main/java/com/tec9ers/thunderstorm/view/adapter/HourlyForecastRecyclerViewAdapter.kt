@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.item_hourly_forecast.view.*
 import javax.inject.Inject
 
 @ActivityContext
-class HourlyForecastRecyclerViewAdapter @Inject constructor(@ActivityContext val context: Context, val format: FormatUtils) :
+class HourlyForecastRecyclerViewAdapter @Inject constructor(@ActivityContext val context: Context, private val format: FormatUtils) :
     RecyclerView.Adapter<HourlyForecastRecyclerViewAdapter.ForecastViewHolder>() {
 
     private var data: List<Hourly>? = null

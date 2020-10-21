@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">Thunderstorm</string>
-    <string name="one_call_test">OneCallTest</string>
     <string name="feels_like">Feels Like</string>
     <string name="temp">%.2f˚C</string>
     <string name="wind_speed">%.2f km/h</string>
-    <string name="pressure">Pressure %.2f atm</string>
-    <string name="uv_index">UV Index: %.2f</string>
-    <string name="visibility">Visibility : %.2f Km</string>
-    <string name="humidity">Humidity : %d </string>
+    <string name="pressure">Pressure\n%.2f bar</string>
+    <string name="uv_index">UV Index\n%.2f</string>
+    <string name="visibility">Visibility\n%.2f Km</string>
+    <string name="humidity">Humidity\n%d </string>
+    <string name="hourly_forecast_title">Today\'s Forecast</string>
 
 </resources>
