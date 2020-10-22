@@ -28,7 +28,6 @@
                 android:textColor="@color/inverted_text"
                 android:textAlignment="center"
                 android:textSize="25sp"
-                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -297,8 +296,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/daily_forecast_rv"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="10dp" />
+            android:layout_height="match_parent" />
 
     </com.google.android.material.card.MaterialCardView>
 

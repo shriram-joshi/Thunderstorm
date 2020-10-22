@@ -4,7 +4,10 @@ import android.content.Context
 import com.tec9ers.thunderstorm.R
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ActivityScoped
-import java.time.*
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.ZoneOffset
+import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
@@ -35,7 +38,15 @@ class FormatUtils @Inject constructor(@ApplicationContext val context: Context) 
         val utcDateTime = LocalDateTime.ofEpochSecond(time, 0, ZoneOffset.UTC)
         val zonedDateTime = ZonedDateTime.of(utcDateTime, ZoneOffset.UTC).withZoneSameInstant(
             ZoneId.systemDefault())
-        val format = DateTimeFormatter.ofPattern("HH:mm")
+        val format = DateTimeFormatter.ofPattern("hh:mm")
+        return format.format(zonedDateTime)
+    }
+
+    fun formatDay(time: Long): String {
+        val utcDateTime = LocalDateTime.ofEpochSecond(time, 0, ZoneOffset.UTC)
+        val zonedDateTime = ZonedDateTime.of(utcDateTime, ZoneOffset.UTC).withZoneSameInstant(
+            ZoneId.systemDefault())
+        val format = DateTimeFormatter.ofPattern("EEEE, d LLL")
         return format.format(zonedDateTime)
     }
 

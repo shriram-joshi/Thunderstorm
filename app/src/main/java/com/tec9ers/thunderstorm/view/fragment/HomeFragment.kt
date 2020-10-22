@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.tec9ers.thunderstorm.R
 import com.tec9ers.thunderstorm.model.onecallapi.OneCallAPIResponse
 import com.tec9ers.thunderstorm.utils.FormatUtils
+import com.tec9ers.thunderstorm.view.adapter.DailyForecastAdapter
 import com.tec9ers.thunderstorm.view.adapter.HourlyForecastRecyclerViewAdapter
 import com.tec9ers.thunderstorm.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,14 +29,15 @@ class HomeFragment : Fragment() {
     lateinit var formatUtils :FormatUtils
     @Inject
     lateinit var hourlyForecastRecyclerViewAdapter: HourlyForecastRecyclerViewAdapter
+    @Inject
+    lateinit var dailyForecastAdapter: DailyForecastAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         // Invert the gradient for the title textview (instead of creating a new drawable)
-        var gradientDrawable: GradientDrawable = ContextCompat.getDrawable(requireContext(),
-            R.drawable.hourly_forecast) as GradientDrawable
-        gradientDrawable = gradientDrawable.mutate() as GradientDrawable
+        val gradientDrawable: GradientDrawable = ContextCompat.getDrawable(requireContext(),
+            R.drawable.hourly_forecast)?.mutate() as GradientDrawable
         gradientDrawable.orientation = GradientDrawable.Orientation.BOTTOM_TOP
         hourly_forecast_title_tv.background = gradientDrawable
 
@@ -48,6 +50,7 @@ class HomeFragment : Fragment() {
         hourly_forecast_rv.addItemDecoration(DividerItemDecoration(context,
             LinearLayoutManager.HORIZONTAL))
 
+        daily_forecast_rv.adapter = dailyForecastAdapter
         daily_forecast_rv.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         hourly_forecast_rv.addItemDecoration(DividerItemDecoration(context,
@@ -80,6 +83,7 @@ class HomeFragment : Fragment() {
                 tv_humidity.text = formatHumidity(current.humidity)
                 tv_visibility.text = formatVisibility(current.visibility)
                 hourlyForecastRecyclerViewAdapter.setData(hourly)
+                dailyForecastAdapter.setData(daily)
             }
         }
     }

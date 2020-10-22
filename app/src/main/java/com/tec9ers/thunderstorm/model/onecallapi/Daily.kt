@@ -6,13 +6,13 @@ import com.tec9ers.thunderstorm.model.Weather
 data class Daily (
 
 	@SerializedName("dt")
-	val dt : Int,
+	val dt : Long,
 
 	@SerializedName("sunrise")
-	val sunrise : Int,
+	val sunrise : Long,
 
 	@SerializedName("sunset")
-	val sunset : Int,
+	val sunset : Long,
 
 	@SerializedName("temp")
 	val temp : Temp,
