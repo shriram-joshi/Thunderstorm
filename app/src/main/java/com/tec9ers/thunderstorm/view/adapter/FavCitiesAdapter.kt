@@ -9,6 +9,7 @@ import com.tec9ers.thunderstorm.R
 import com.tec9ers.thunderstorm.model.CurrentWeatherResponse
 import com.tec9ers.thunderstorm.utils.FormatUtils
 import dagger.hilt.android.qualifiers.ActivityContext
+import kotlinx.android.synthetic.main.item_fav_city.view.*
 import javax.inject.Inject
 
 @ActivityContext
@@ -27,7 +28,7 @@ class FavCitiesAdapter @Inject constructor(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavCitiesViewHolder {
         return FavCitiesViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_daily_forecast, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_fav_city, parent, false)
         )
     }
 
@@ -43,7 +44,8 @@ class FavCitiesAdapter @Inject constructor(
 
         fun populate(currentWeatherResponse: CurrentWeatherResponse, format: FormatUtils) {
             with(itemView, {
-
+                tv_city_name.text = currentWeatherResponse.name
+                tv_city_temp.text = format.formatTemp(currentWeatherResponse.main.temp.toDouble())
             })
         }
     }
