@@ -4,18 +4,19 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.tec9ers.thunderstorm.R
 import com.tec9ers.thunderstorm.model.CurrentWeatherResponse
-import com.tec9ers.thunderstorm.model.onecallapi.Daily
 import com.tec9ers.thunderstorm.utils.FormatUtils
 import dagger.hilt.android.qualifiers.ActivityContext
-import kotlinx.android.synthetic.main.item_daily_forecast.view.*
+import kotlinx.android.synthetic.main.item_fav_city.view.*
 import javax.inject.Inject
 
 @ActivityContext
-class FavCitiesAdapter @Inject constructor(@ActivityContext val context: Context, private val format: FormatUtils) :
+class FavCitiesAdapter @Inject constructor(
+    @ActivityContext val context: Context,
+    private val format: FormatUtils
+) :
     RecyclerView.Adapter<FavCitiesAdapter.FavCitiesViewHolder>() {
 
     private var data: List<CurrentWeatherResponse>? = null
@@ -26,10 +27,12 @@ class FavCitiesAdapter @Inject constructor(@ActivityContext val context: Context
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavCitiesViewHolder {
-        return FavCitiesViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_daily_forecast, parent, false))
+        return FavCitiesViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.item_fav_city, parent, false)
+        )
     }
 
-    override fun onBindViewHolder(holder:FavCitiesViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: FavCitiesViewHolder, position: Int) {
         data?.get(position)?.let { holder.populate(it, format) }
     }
 
@@ -41,7 +44,8 @@ class FavCitiesAdapter @Inject constructor(@ActivityContext val context: Context
 
         fun populate(currentWeatherResponse: CurrentWeatherResponse, format: FormatUtils) {
             with(itemView, {
-
+                tv_city_name.text = currentWeatherResponse.name
+                tv_city_temp.text = format.formatTemp(currentWeatherResponse.main.temp.toDouble())
             })
         }
     }

@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tec9ers.thunderstorm.R
@@ -55,6 +56,8 @@ class HomeFragment : Fragment() {
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         hourly_forecast_rv.addItemDecoration(DividerItemDecoration(context,
             LinearLayoutManager.HORIZONTAL))
+
+        main_card_title_tv.setOnClickListener(View.OnClickListener { NavHostFragment.findNavController(this).navigate(R.id.action_homeFragment_to_favCities) })
     }
 
     override fun onCreateView(

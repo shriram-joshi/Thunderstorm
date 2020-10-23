@@ -10,26 +10,28 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class DataStoreUtils @Inject constructor(@ApplicationContext val context: Context) {
 
     private val dataStore: DataStore<Preferences> = context.createDataStore(
         name = "cities_store"
     )
 
-    private val cities = preferencesKey<MutableList<String>>("cities")
+    private val cities = preferencesKey<String>("cities")
 
     // To Read cities
-    val citiesFlow: Flow<MutableList<String>> = dataStore.data
+    val citiesFlow: Flow<String> = dataStore.data
         .map { preferences ->
-            preferences[cities] ?: mutableListOf("")
+            preferences[cities] ?: " "
         }
 
     //To ADD City
     suspend fun addCities(city: String) {
         dataStore.edit { preferences ->
-            val citiesValue = preferences[cities] ?: listOf("")
-            preferences[cities] = (citiesValue + city) as MutableList<String>
+            val citiesValue = preferences[cities] ?: " "
+            preferences[cities] = (citiesValue + city)
         }
 
     }

@@ -21,18 +21,19 @@ class FavCitiesViewModel @ViewModelInject constructor(private val repository: Re
         MutableLiveData<MutableList<CurrentWeatherResponse>>()
     }
 
-    fun getOneCallApiLiveData(citiesList: List<String>): LiveData<MutableList<CurrentWeatherResponse>> {
+    fun getCurrentCitiesLiveData(citiesList: List<String>): LiveData<MutableList<CurrentWeatherResponse>> {
         fetchCitiesData(citiesList)
         return _currentWeather
     }
 
     private fun fetchCitiesData(cityList: List<String>) {
-        val obs = Observable.fromIterable(cityList)
+        val currentWeatherResponseList = mutableListOf<CurrentWeatherResponse>()
+        Observable.fromIterable(cityList)
             .flatMap { city ->
                 repository.getCurrentWeatherSingle(QueryParams().getResponseByCity(city))
                     .toObservable()
             }.subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
+            .subscribe(
                 object : Observer<CurrentWeatherResponse> {
                     override fun onSubscribe(disposable: Disposable?) {
                         compositeDisposable.add(disposable)
@@ -40,7 +41,8 @@ class FavCitiesViewModel @ViewModelInject constructor(private val repository: Re
 
                     override fun onNext(currentWeatherResponse: CurrentWeatherResponse?) {
                         if (currentWeatherResponse != null) {
-                            _currentWeather.value?.add(currentWeatherResponse)
+                            currentWeatherResponseList.add(currentWeatherResponse)
+                            _currentWeather.value = currentWeatherResponseList
                         }
                     }
 
@@ -53,6 +55,12 @@ class FavCitiesViewModel @ViewModelInject constructor(private val repository: Re
                     }
 
                 }
-            }
+            )
+    }
+
+    override fun onCleared() {
+        compositeDisposable.dispose()
+        super.onCleared()
+
     }
 }
