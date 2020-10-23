@@ -17,15 +17,19 @@ class DataStoreUtils @Inject constructor(@ApplicationContext val context: Contex
         name = "cities_store"
     )
 
-    private val cities = preferencesKey<List<String>>("cities")
-    val citiesFlow: Flow<List<String>> = dataStore.data
+    private val cities = preferencesKey<MutableList<String>>("cities")
+
+    // To Read cities
+    val citiesFlow: Flow<MutableList<String>> = dataStore.data
         .map { preferences ->
-            preferences[cities] ?: listOf("")
+            preferences[cities] ?: mutableListOf("")
         }
+
+    //To ADD City
     suspend fun addCities(city: String) {
         dataStore.edit { preferences ->
             val citiesValue = preferences[cities] ?: listOf("")
-            preferences[cities] = citiesValue + city
+            preferences[cities] = (citiesValue + city) as MutableList<String>
         }
 
     }
