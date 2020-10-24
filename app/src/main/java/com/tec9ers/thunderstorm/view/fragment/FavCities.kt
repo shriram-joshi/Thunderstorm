@@ -32,10 +32,10 @@ class FavCities : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        floating_button.setOnClickListener(View.OnClickListener {
+        floating_button.setOnClickListener {
             NavHostFragment.findNavController(this)
                 .navigate(R.id.action_favCities_to_searchFragment)
-        })
+        }
         rv_fav_cities.adapter = adapter
         rv_fav_cities.layoutManager = LinearLayoutManager(requireActivity())
     }

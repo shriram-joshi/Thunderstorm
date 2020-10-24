@@ -8,17 +8,16 @@
             android:title="@string/home"
             />
         <item
-            android:id="@+id/nav_fav"
+            android:id="@+id/nav_fav_cities"
             android:title="@string/favourites"
             />
-        <item
-            android:id="@+id/nav_settings"
-            android:title="@string/settings"
-            />
-        <item
-            android:id="@+id/nav_about"
-            android:title="@string/about_us"
-            />
+<!--        <item-->
+<!--            android:id="@+id/nav_settings"-->
+<!--            android:title="@string/settings"-->
+<!--            />-->
+<!--        <item-->
+<!--            android:id="@+id/nav_about"-->
+<!--            android:title="@string/about_us"-->
+<!--            />-->
     </group>
-
 </menu>
