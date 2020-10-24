@@ -41,9 +41,4 @@ object RetrofitModule {
             .build()
     }
 
-    @Singleton
-    @Provides
-    fun provideInterceptor(): RequestInterceptor {
-        return RequestInterceptor()
-    }
 }
