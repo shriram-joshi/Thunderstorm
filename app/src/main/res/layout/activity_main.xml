@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout
+    android:id="@+id/side_nav_drawer"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.activity.MainActivity">
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_controller_main"
@@ -14,5 +17,14 @@
         app:defaultNavHost="true"
         app:navGraph="@navigation/main_navigation" />
 
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/side_nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@color/side_nav_background"
+        app:headerLayout="@layout/side_nav_header"
+        app:menu="@menu/side_nav_menu"
+        android:layout_gravity="start"
+        app:itemTextColor="@color/standard_text"/>
 
-</LinearLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

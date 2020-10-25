@@ -9,4 +9,6 @@
     <color name="standard_text">@color/honeydew</color>
     <color name="inverted_text">@color/space_cadet</color>
     <color name="status_bar">@color/glaucous</color>
+    <color name="header_app_name">@color/glaucous</color>
+    <color name="side_nav_background">@color/midnight_blue</color>
 </resources>

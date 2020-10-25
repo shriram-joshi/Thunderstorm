@@ -57,7 +57,9 @@ class HomeFragment : Fragment() {
         hourly_forecast_rv.addItemDecoration(DividerItemDecoration(context,
             LinearLayoutManager.HORIZONTAL))
 
-        main_card_title_tv.setOnClickListener(View.OnClickListener { NavHostFragment.findNavController(this).navigate(R.id.action_homeFragment_to_favCities) })
+        main_card_title_tv.setOnClickListener {
+            NavHostFragment.findNavController(this).navigate(R.id.action_homeFragment_to_favCities)
+        }
     }
 
     override fun onCreateView(
