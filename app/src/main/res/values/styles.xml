@@ -9,4 +9,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- Side navigation selected item theme -->
+    <style name="side_nav_theme">
+        <!--Colour of background when selected-->
+        <item name="colorControlHighlight">@color/menu_item_selected_background</item>
+        <item name="itemPadding">10dp</item>
+    </style>
+
 </resources>

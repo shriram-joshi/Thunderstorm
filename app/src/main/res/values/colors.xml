@@ -21,6 +21,8 @@
     <color name="salsa">#EB5757</color>
     <color name="sandy_brown">#F2994A</color>
     <color name="lavender_web">#DCD6F7</color>
+    <color name="shadow_color_notnight">#40000000</color>
+    <color name="shadow_color_night">#40FFFFFF</color>
     
     <color name="background">@color/lavender_web</color>
     <color name="main_card_background">@color/ivory</color>
@@ -32,6 +34,8 @@
     <color name="inverted_text">@color/ivory</color>
     <color name="status_bar">@color/space_cadet</color>
     <color name="header_app_name">@color/blue_jeans</color>
+    <color name="header_app_name_shadow">@color/shadow_color_notnight</color>
     <color name="side_nav_background">@color/honeydew</color>
-
+    <color name="menu_item_selected_background">#AABAAE</color>
+    <color name="side_nav_menu_icon">@color/eerie_black</color>
 </resources>
