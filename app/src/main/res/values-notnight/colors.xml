@@ -10,5 +10,8 @@
     <color name="inverted_text">@color/ivory</color>
     <color name="status_bar">@color/space_cadet</color>
     <color name="header_app_name">@color/blue_jeans</color>
+    <color name="header_app_name_shadow">@color/shadow_color_notnight</color>
     <color name="side_nav_background">@color/honeydew</color>
+    <color name="menu_item_selected_background">#EF5350</color>
+    <color name="side_nav_menu_icon">@color/eerie_black</color>
 </resources>

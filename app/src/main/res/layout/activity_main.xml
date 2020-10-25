@@ -25,6 +25,8 @@
         app:headerLayout="@layout/side_nav_header"
         app:menu="@menu/side_nav_menu"
         android:layout_gravity="start"
-        app:itemTextColor="@color/standard_text"/>
+        app:itemTextColor="@color/standard_text"
+        app:itemIconTint="@color/side_nav_menu_icon"
+        android:theme="@style/side_nav_theme"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>
