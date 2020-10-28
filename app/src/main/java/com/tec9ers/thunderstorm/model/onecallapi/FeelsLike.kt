@@ -2,17 +2,17 @@ package com.tec9ers.thunderstorm.model.onecallapi
 
 import com.google.gson.annotations.SerializedName
 
-data class FeelsLike (
+data class FeelsLike(
 
-	@SerializedName("day")
-	val day : Double,
+    @SerializedName("day")
+    val day: Double,
 
-	@SerializedName("night")
-	val night : Double,
+    @SerializedName("night")
+    val night: Double,
 
-	@SerializedName("eve")
-	val eve : Double,
+    @SerializedName("eve")
+    val eve: Double,
 
-	@SerializedName("morn")
-	val morn : Double
+    @SerializedName("morn")
+    val morn: Double
 )

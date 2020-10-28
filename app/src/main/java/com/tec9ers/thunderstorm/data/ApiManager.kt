@@ -1,4 +1,3 @@
 package com.tec9ers.thunderstorm.data
 
-class ApiManager{
-}
+class ApiManager

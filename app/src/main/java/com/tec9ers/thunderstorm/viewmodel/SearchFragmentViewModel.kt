@@ -24,19 +24,18 @@ class SearchFragmentViewModel @ViewModelInject constructor(val searchRepository:
     fun fetchSearchResponseLiveData(query: String) {
         searchRepository.searchApiService.getSuggestedCities(query)
             .subscribeOn(Schedulers.newThread())
-            .observeOn(AndroidSchedulers.mainThread()).subscribe(object :SingleObserver<SearchResponse>{
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : SingleObserver<SearchResponse> {
                 override fun onSubscribe(disposable: Disposable?) {
                     compositeDisposable.add(disposable)
                 }
 
                 override fun onSuccess(searchResponse: SearchResponse?) {
-                   _searchResponseLiveData.value = searchResponse
+                    _searchResponseLiveData.value = searchResponse
                 }
 
                 override fun onError(error: Throwable?) {
-
                 }
-
             })
     }
 }

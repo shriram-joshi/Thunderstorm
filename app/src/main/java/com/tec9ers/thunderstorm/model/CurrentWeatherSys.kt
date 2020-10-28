@@ -2,23 +2,23 @@ package com.tec9ers.thunderstorm.model
 
 import com.google.gson.annotations.SerializedName
 
-data class CurrentWeatherSys (
-    
+data class CurrentWeatherSys(
+
     @SerializedName("type")
-    val type : Long,
+    val type: Long,
 
     @SerializedName("id")
-    val id : Long,
+    val id: Long,
 
     @SerializedName("message")
-    val message : Float,
+    val message: Float,
 
     @SerializedName("country")
-    val country : String,
+    val country: String,
 
     @SerializedName("sunrise")
-    val sunrise : Long,
+    val sunrise: Long,
 
     @SerializedName("sunset")
-    val sunset : Long
+    val sunset: Long
 )

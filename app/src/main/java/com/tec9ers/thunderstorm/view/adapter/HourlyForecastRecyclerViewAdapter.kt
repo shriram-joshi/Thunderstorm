@@ -32,7 +32,7 @@ class HourlyForecastRecyclerViewAdapter @Inject constructor(@ActivityContext val
     }
 
     override fun onBindViewHolder(holder: ForecastViewHolder, position: Int) {
-        data?.get(position)?.let { holder.setData(it,format) }
+        data?.get(position)?.let { holder.setData(it, format) }
     }
 
     class ForecastViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

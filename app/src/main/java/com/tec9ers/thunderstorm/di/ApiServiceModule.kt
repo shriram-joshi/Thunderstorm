@@ -14,7 +14,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 // TODO Install this is ActivityExtendedScope
-
 @Module
 @InstallIn(ApplicationComponent::class)
 object ApiServiceModule {
@@ -38,5 +37,4 @@ object ApiServiceModule {
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .build().create(SearchApiService::class.java)
     }
-
 }

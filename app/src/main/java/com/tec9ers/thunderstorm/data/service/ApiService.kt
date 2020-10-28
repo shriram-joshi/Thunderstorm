@@ -10,11 +10,11 @@ import retrofit2.http.QueryMap
 interface ApiService {
 
     @GET("weather")
-    fun getCurrentWeather(@QueryMap map: HashMap<String,String>) : Single<CurrentWeatherResponse>
+    fun getCurrentWeather(@QueryMap map: HashMap<String, String>): Single<CurrentWeatherResponse>
 
     @GET("forecast")
-    fun getForecast(@QueryMap map: HashMap<String, String>) : Single<ForecastResponse>
+    fun getForecast(@QueryMap map: HashMap<String, String>): Single<ForecastResponse>
 
     @GET("onecall")
-    fun getOneCallApiData(@QueryMap map: HashMap<String, String>) : Single<OneCallAPIResponse>
+    fun getOneCallApiData(@QueryMap map: HashMap<String, String>): Single<OneCallAPIResponse>
 }

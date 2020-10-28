@@ -2,11 +2,11 @@ package com.tec9ers.thunderstorm.model.onecallapi
 
 import com.google.gson.annotations.SerializedName
 
-data class Minutely (
+data class Minutely(
 
-	@SerializedName("dt")
-	val dt : Long,
+    @SerializedName("dt")
+    val dt: Long,
 
-	@SerializedName("precipitation")
-	val precipitation : Double
+    @SerializedName("precipitation")
+    val precipitation: Double
 )
