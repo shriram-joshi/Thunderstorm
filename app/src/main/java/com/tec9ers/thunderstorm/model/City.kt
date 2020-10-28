@@ -11,7 +11,7 @@ data class City(
     val name: String,
 
     @SerializedName("coord")
-    val coord: Coord,
+    val coord : Coord,
 
     @SerializedName("country")
     val country: String,
