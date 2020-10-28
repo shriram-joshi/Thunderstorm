@@ -18,7 +18,10 @@ object RetrofitModule {
 
     @Singleton
     @Provides
-    fun provideRetrofit (gsonConverterFactory: GsonConverterFactory, okHttpClient: OkHttpClient): Retrofit {
+    fun provideRetrofit(
+        gsonConverterFactory: GsonConverterFactory,
+        okHttpClient: OkHttpClient
+    ): Retrofit {
         return Retrofit.Builder().baseUrl("https://api.openweathermap.org/data/2.5/")
             .client(okHttpClient)
             .addConverterFactory(gsonConverterFactory)
@@ -28,11 +31,11 @@ object RetrofitModule {
 
     @Singleton
     @Provides
-    fun provideGsonconverterFactory() : GsonConverterFactory = GsonConverterFactory.create()
+    fun provideGsonconverterFactory(): GsonConverterFactory = GsonConverterFactory.create()
 
     @Singleton
     @Provides
-    fun provideOkHttp(requestInterceptor: RequestInterceptor) : OkHttpClient {
+    fun provideOkHttp(requestInterceptor: RequestInterceptor): OkHttpClient {
         val logger = HttpLoggingInterceptor()
         logger.setLevel(HttpLoggingInterceptor.Level.BODY)
         return OkHttpClient().newBuilder()
@@ -40,5 +43,4 @@ object RetrofitModule {
             .addInterceptor(logger)
             .build()
     }
-
 }

@@ -47,13 +47,12 @@ class FavCitiesViewModel @ViewModelInject constructor(private val repository: Re
                     }
 
                     override fun onError(error: Throwable?) {
-                        //TODO handle error here
+                        // TODO handle error here
                     }
 
                     override fun onComplete() {
-                        //TODO handles on complete
+                        // TODO handles on complete
                     }
-
                 }
             )
     }
@@ -61,6 +60,5 @@ class FavCitiesViewModel @ViewModelInject constructor(private val repository: Re
     override fun onCleared() {
         compositeDisposable.dispose()
         super.onCleared()
-
     }
 }

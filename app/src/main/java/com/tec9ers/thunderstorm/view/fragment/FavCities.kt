@@ -41,12 +41,13 @@ class FavCities : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         /**dataStoreUtils.citiesFlow.asLiveData()
-        .observe(viewLifecycleOwner,
-        { citiesList -> setupRecyclerView(citiesListFake as MutableList<String>) })*/
+         .observe(viewLifecycleOwner,
+         { citiesList -> setupRecyclerView(citiesListFake as MutableList<String>) })*/
         setupRecyclerView(citiesListFake as MutableList<String>)
         return inflater.inflate(R.layout.fragment_fav_cities, container, false)
     }
@@ -54,8 +55,11 @@ class FavCities : Fragment() {
     private fun setupRecyclerView(citiesList: MutableList<String>) {
 
         viewModel.getCurrentCitiesLiveData(citiesListFake)
-            .observe(viewLifecycleOwner, { response ->
-                adapter.setData(response)
-            })
+            .observe(
+                viewLifecycleOwner,
+                { response ->
+                    adapter.setData(response)
+                }
+            )
     }
 }

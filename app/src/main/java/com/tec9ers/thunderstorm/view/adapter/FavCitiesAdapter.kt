@@ -43,10 +43,13 @@ class FavCitiesAdapter @Inject constructor(
     class FavCitiesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun populate(currentWeatherResponse: CurrentWeatherResponse, format: FormatUtils) {
-            with(itemView, {
-                tv_city_name.text = currentWeatherResponse.name
-                tv_city_temp.text = format.formatTemp(currentWeatherResponse.main.temp.toDouble())
-            })
+            with(
+                itemView,
+                {
+                    tv_city_name.text = currentWeatherResponse.name
+                    tv_city_temp.text = format.formatTemp(currentWeatherResponse.main.temp.toDouble())
+                }
+            )
         }
     }
 }

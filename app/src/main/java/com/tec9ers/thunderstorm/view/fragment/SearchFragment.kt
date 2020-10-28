@@ -1,11 +1,11 @@
 package com.tec9ers.thunderstorm.view.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tec9ers.thunderstorm.R
@@ -37,35 +37,42 @@ class SearchFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        searchFragmentViewModel.getSearchResponseLiveData().observe(viewLifecycleOwner, {
-            citiesSearchAdapter.setData(it.embedded.cities)
-        })
+        searchFragmentViewModel.getSearchResponseLiveData().observe(
+            viewLifecycleOwner,
+            {
+                citiesSearchAdapter.setData(it.embedded.cities)
+            }
+        )
 
         return inflater.inflate(R.layout.fragment_search, container, false)
     }
 
     private fun observableSearchView() {
-        Observable.create((ObservableOnSubscribe<String> {
-            search_view.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(query: String?): Boolean {
-                    if (query != null || query == "") {
-                        searchFragmentViewModel.fetchSearchResponseLiveData(query)
-                    }
-                    return false
-                }
+        Observable.create(
+            (
+                ObservableOnSubscribe<String> {
+                    search_view.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                        override fun onQueryTextSubmit(query: String?): Boolean {
+                            if (query != null || query == "") {
+                                searchFragmentViewModel.fetchSearchResponseLiveData(query)
+                            }
+                            return false
+                        }
 
-                override fun onQueryTextChange(newText: String?): Boolean {
-                    if (!it.isDisposed) {
-                        it.onNext(newText)
-                    }
-                    return false
+                        override fun onQueryTextChange(newText: String?): Boolean {
+                            if (!it.isDisposed) {
+                                it.onNext(newText)
+                            }
+                            return false
+                        }
+                    })
                 }
-
-            })
-        })).debounce(500, TimeUnit.MILLISECONDS)
+                )
+        ).debounce(500, TimeUnit.MILLISECONDS)
             .subscribeOn(Schedulers.newThread())
             .subscribe(object : Observer<String> {
                 override fun onSubscribe(disposable: Disposable?) {
@@ -83,7 +90,6 @@ class SearchFragment : Fragment() {
 
                 override fun onComplete() {
                 }
-
             })
     }
 

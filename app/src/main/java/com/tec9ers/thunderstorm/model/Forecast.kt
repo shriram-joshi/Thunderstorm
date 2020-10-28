@@ -2,35 +2,35 @@ package com.tec9ers.thunderstorm.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Forecast (
+data class Forecast(
 
     @SerializedName("coord")
-    val coord : Coord,
+    val coord: Coord,
 
     @SerializedName("weather")
-    val weather : List<Weather>,
+    val weather: List<Weather>,
 
     @SerializedName("main")
-    val main : ForecastMain,
+    val main: ForecastMain,
 
     @SerializedName("visibility")
-    val visibility : Long,
+    val visibility: Long,
 
     @SerializedName("wind")
-    val wind : Wind,
+    val wind: Wind,
 
     @SerializedName("clouds")
-    val clouds : Clouds,
+    val clouds: Clouds,
 
     @SerializedName("dt")
-    val dt : Long,
+    val dt: Long,
 
     @SerializedName("sys")
-    val sys : ForecastSys,
+    val sys: ForecastSys,
 
     @SerializedName("pop")
-    val pop : Double,
+    val pop: Double,
 
     @SerializedName("dt_text")
-    val datetxt : String
+    val datetxt: String
 )

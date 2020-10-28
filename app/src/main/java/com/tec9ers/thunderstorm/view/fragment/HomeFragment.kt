@@ -22,12 +22,11 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_home.*
 import javax.inject.Inject
 
-
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
     private val homeViewModel: HomeViewModel by viewModels()
     @Inject
-    lateinit var formatUtils :FormatUtils
+    lateinit var formatUtils: FormatUtils
     @Inject
     lateinit var hourlyForecastRecyclerViewAdapter: HourlyForecastRecyclerViewAdapter
     @Inject
@@ -37,8 +36,10 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Invert the gradient for the title textview (instead of creating a new drawable)
-        val gradientDrawable: GradientDrawable = ContextCompat.getDrawable(requireContext(),
-            R.drawable.hourly_forecast)?.mutate() as GradientDrawable
+        val gradientDrawable: GradientDrawable = ContextCompat.getDrawable(
+            requireContext(),
+            R.drawable.hourly_forecast
+        )?.mutate() as GradientDrawable
         gradientDrawable.orientation = GradientDrawable.Orientation.BOTTOM_TOP
         hourly_forecast_title_tv.background = gradientDrawable
 
@@ -48,14 +49,22 @@ class HomeFragment : Fragment() {
         hourly_forecast_rv.adapter = hourlyForecastRecyclerViewAdapter
         hourly_forecast_rv.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        hourly_forecast_rv.addItemDecoration(DividerItemDecoration(context,
-            LinearLayoutManager.HORIZONTAL))
+        hourly_forecast_rv.addItemDecoration(
+            DividerItemDecoration(
+                context,
+                LinearLayoutManager.HORIZONTAL
+            )
+        )
 
         daily_forecast_rv.adapter = dailyForecastAdapter
         daily_forecast_rv.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        hourly_forecast_rv.addItemDecoration(DividerItemDecoration(context,
-            LinearLayoutManager.HORIZONTAL))
+        hourly_forecast_rv.addItemDecoration(
+            DividerItemDecoration(
+                context,
+                LinearLayoutManager.HORIZONTAL
+            )
+        )
 
         main_card_title_tv.setOnClickListener {
             NavHostFragment.findNavController(this).navigate(R.id.action_homeFragment_to_favCities)

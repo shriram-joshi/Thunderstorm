@@ -22,8 +22,8 @@ class HomeViewModel @ViewModelInject constructor(private val repository: Reposit
         }
     }
 
-    val oneCallApiLivaData : LiveData<OneCallAPIResponse>
-    get() = _oneCallApiLiveData
+    val oneCallApiLivaData: LiveData<OneCallAPIResponse>
+        get() = _oneCallApiLiveData
 
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 

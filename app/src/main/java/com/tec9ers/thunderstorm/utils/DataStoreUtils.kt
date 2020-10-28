@@ -18,7 +18,7 @@ import javax.inject.Singleton
 
 @Singleton
 class DataStoreUtils @Inject constructor(@ApplicationContext val context: Context) {
-    //TO read cities
+    // TO read cities
     val citiesListLiveData: LiveData<List<String>>
         get() = citiesFlow.map { s -> s.split(" ") }.asLiveData()
 
@@ -33,7 +33,7 @@ class DataStoreUtils @Inject constructor(@ApplicationContext val context: Contex
             preferences[cities] ?: " "
         }
 
-    //To ADD City
+    // To ADD City
     suspend fun addCitiesDataStore(city: String) {
         if (TextUtils.isEmpty(city)) throw IOException("Parameter city cannot be empty")
         dataStore.edit { preferences ->
@@ -42,11 +42,10 @@ class DataStoreUtils @Inject constructor(@ApplicationContext val context: Contex
         }
     }
 
-    //To change list of cities
+    // To change list of cities
     suspend fun setCitiesDataStore(city: List<String>) {
         dataStore.edit { preferences ->
             preferences[cities] = (city.joinToString(" "))
         }
-
     }
 }

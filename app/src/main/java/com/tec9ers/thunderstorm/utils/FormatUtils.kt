@@ -37,7 +37,8 @@ class FormatUtils @Inject constructor(@ApplicationContext val context: Context) 
     fun formatTime(time: Long): String {
         val utcDateTime = LocalDateTime.ofEpochSecond(time, 0, ZoneOffset.UTC)
         val zonedDateTime = ZonedDateTime.of(utcDateTime, ZoneOffset.UTC).withZoneSameInstant(
-            ZoneId.systemDefault())
+            ZoneId.systemDefault()
+        )
         val format = DateTimeFormatter.ofPattern("hh:mm")
         return format.format(zonedDateTime)
     }
@@ -45,26 +46,27 @@ class FormatUtils @Inject constructor(@ApplicationContext val context: Context) 
     fun formatDay(time: Long): String {
         val utcDateTime = LocalDateTime.ofEpochSecond(time, 0, ZoneOffset.UTC)
         val zonedDateTime = ZonedDateTime.of(utcDateTime, ZoneOffset.UTC).withZoneSameInstant(
-            ZoneId.systemDefault())
+            ZoneId.systemDefault()
+        )
         val format = DateTimeFormatter.ofPattern("EEEE, d LLL")
         return format.format(zonedDateTime)
     }
 
     fun formatPressure(pressure: Int): String {
-        val bar = pressure.toFloat()/1000
+        val bar = pressure.toFloat() / 1000
         return (context.getString(R.string.pressure, bar))
     }
 
-    fun formatVisibility(visibility : Int): String {
-        val km = visibility*0.001
-        return context.getString(R.string.visibility,km)
+    fun formatVisibility(visibility: Int): String {
+        val km = visibility * 0.001
+        return context.getString(R.string.visibility, km)
     }
 
     fun formatHumidity(humidity: Int): String {
-        return context.getString(R.string.humidity,humidity) + " %"
+        return context.getString(R.string.humidity, humidity) + " %"
     }
 
-    fun formatUVI(UVI : Double): String{
-        return context.getString(R.string.uv_index,UVI)
+    fun formatUVI(UVI: Double): String {
+        return context.getString(R.string.uv_index, UVI)
     }
 }

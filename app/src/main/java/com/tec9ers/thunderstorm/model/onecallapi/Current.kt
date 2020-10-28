@@ -3,47 +3,47 @@ package com.tec9ers.thunderstorm.model.onecallapi
 import com.google.gson.annotations.SerializedName
 import com.tec9ers.thunderstorm.model.Weather
 
-data class Current (
+data class Current(
 
-	@SerializedName("dt")
-	val dt : Int,
+    @SerializedName("dt")
+    val dt: Int,
 
-	@SerializedName("sunrise")
-	val sunrise : Long,
+    @SerializedName("sunrise")
+    val sunrise: Long,
 
-	@SerializedName("sunset")
-	val sunset : Long,
+    @SerializedName("sunset")
+    val sunset: Long,
 
-	@SerializedName("temp")
-	val temp : Double,
+    @SerializedName("temp")
+    val temp: Double,
 
-	@SerializedName("feels_like")
-	val feelsLike : Double,
+    @SerializedName("feels_like")
+    val feelsLike: Double,
 
-	@SerializedName("pressure")
-	val pressure : Int,
+    @SerializedName("pressure")
+    val pressure: Int,
 
-	@SerializedName("humidity")
-	val humidity : Int,
+    @SerializedName("humidity")
+    val humidity: Int,
 
-	@SerializedName("dew_point")
-	val dewPoint : Double,
+    @SerializedName("dew_point")
+    val dewPoint: Double,
 
-	@SerializedName("uvi")
-	val uvi : Double,
+    @SerializedName("uvi")
+    val uvi: Double,
 
-	@SerializedName("clouds")
-	val clouds : Int,
+    @SerializedName("clouds")
+    val clouds: Int,
 
-	@SerializedName("visibility")
-	val visibility : Int,
+    @SerializedName("visibility")
+    val visibility: Int,
 
-	@SerializedName("wind_speed")
-	val windSpeed : Double,
+    @SerializedName("wind_speed")
+    val windSpeed: Double,
 
-	@SerializedName("wind_deg")
-	val windDeg : Int,
+    @SerializedName("wind_deg")
+    val windDeg: Int,
 
-	@SerializedName("weather")
-	val weather : List<Weather>
+    @SerializedName("weather")
+    val weather: List<Weather>
 )
