@@ -9,7 +9,7 @@ class RequestInterceptor @Inject constructor() : Interceptor {
         val request = chain.request()
         // TODO("ADD API KEY HERE")
         val myurl = request.url.newBuilder()
-            .addQueryParameter("appid", "API_KEY")
+            .addQueryParameter("appid", "5239cb4b43a7769237255c39ba8c6bbd")
             .addQueryParameter("units", "metric")
             .build()
         return chain.proceed(request.newBuilder().url(myurl).build())

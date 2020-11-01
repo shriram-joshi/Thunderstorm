@@ -29,7 +29,8 @@ class DailyForecastAdapter @Inject constructor(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DailyForecastViewHolder {
         return DailyForecastViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_daily_forecast, parent, false)
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_daily_forecast, parent, false)
         )
     }
 

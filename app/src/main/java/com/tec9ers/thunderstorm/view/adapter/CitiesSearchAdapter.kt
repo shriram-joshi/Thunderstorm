@@ -24,6 +24,10 @@ class CitiesSearchAdapter @Inject constructor(
         notifyDataSetChanged()
     }
 
+    fun getData(): List<CityContainer>? {
+        return this.data
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CitiesSearchViewHolder {
         return CitiesSearchViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_city_search, parent, false)
