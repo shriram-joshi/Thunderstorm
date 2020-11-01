@@ -53,8 +53,7 @@ class FormatUtils @Inject constructor(@ApplicationContext val context: Context) 
     }
 
     fun formatPressure(pressure: Int): String {
-        val bar = pressure.toFloat() / 1000
-        return (context.getString(R.string.pressure, bar))
+        return (context.getString(R.string.pressure, pressure))
     }
 
     fun formatVisibility(visibility: Int): String {

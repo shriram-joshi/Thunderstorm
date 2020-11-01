@@ -13,26 +13,32 @@ import kotlinx.android.synthetic.main.item_hourly_forecast.view.*
 import javax.inject.Inject
 
 @ActivityContext
-class HourlyForecastRecyclerViewAdapter @Inject constructor(@ActivityContext val context: Context, private val format: FormatUtils) :
+class HourlyForecastRecyclerViewAdapter @Inject constructor(
+    @ActivityContext val context: Context,
+    private val format: FormatUtils
+) :
     RecyclerView.Adapter<HourlyForecastRecyclerViewAdapter.ForecastViewHolder>() {
 
     private var data: List<Hourly>? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ForecastViewHolder {
-        val inflater = LayoutInflater.from(context)
-        val view = inflater.inflate(R.layout.item_hourly_forecast, parent, false)
-        return ForecastViewHolder(view)
-    }
     fun setData(data: List<Hourly>) {
         this.data = data
         notifyDataSetChanged()
     }
-    override fun getItemCount(): Int {
-        return if (data == null) 0 else data!!.size
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ForecastViewHolder {
+        return ForecastViewHolder(
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_hourly_forecast, parent, false)
+        )
     }
 
     override fun onBindViewHolder(holder: ForecastViewHolder, position: Int) {
         data?.get(position)?.let { holder.setData(it, format) }
+    }
+
+    override fun getItemCount(): Int {
+        return if (data == null) 0 else data!!.size
     }
 
     class ForecastViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

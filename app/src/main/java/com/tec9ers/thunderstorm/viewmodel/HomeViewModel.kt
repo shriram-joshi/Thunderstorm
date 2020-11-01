@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModel
 import com.tec9ers.thunderstorm.data.QueryParams
 import com.tec9ers.thunderstorm.data.Repository
 import com.tec9ers.thunderstorm.model.onecallapi.OneCallAPIResponse
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.SingleObserver
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
@@ -16,38 +15,37 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 
 class HomeViewModel @ViewModelInject constructor(private val repository: Repository) : ViewModel() {
 
-    private val _oneCallApiLiveData: MutableLiveData<OneCallAPIResponse> by lazy {
-        MutableLiveData<OneCallAPIResponse>().also {
-            fetchOneCallAPIData()
-        }
-    }
+    private val oneCallApiLiveData = MutableLiveData<OneCallAPIResponse>()
 
-    val oneCallApiLivaData: LiveData<OneCallAPIResponse>
-        get() = _oneCallApiLiveData
+    fun getOneCallAPIData(): LiveData<OneCallAPIResponse> {
+        return oneCallApiLiveData
+    }
 
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
-    private fun fetchOneCallAPIData() {
-        repository.getOneCallApiDataSingle(QueryParams().getResponseByCoordinates(18.558, 73.804))
+    fun fetchOneCallAPIData(lat: Float = 18.558f, lon: Float = 73.804f) {
+        repository.getOneCallApiDataSingle(
+            QueryParams().getResponseByCoordinates(lat, lon).excludeField("minutely")
+        )
             .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : SingleObserver<OneCallAPIResponse> {
-                override fun onSubscribe(d: Disposable?) {
-                    compositeDisposable.add(d)
+                override fun onSubscribe(disposable: Disposable?) {
+                    compositeDisposable.add(disposable)
                 }
 
                 override fun onSuccess(oneCallAPIResponse: OneCallAPIResponse?) {
-                    _oneCallApiLiveData.value = oneCallAPIResponse
+                    oneCallApiLiveData.postValue(oneCallAPIResponse)
                 }
 
-                override fun onError(e: Throwable?) {
-                    Log.d("OneCallAPI", "Failed: " + e.toString())
+                override fun onError(throwable: Throwable?) {
+                    Log.d("OneCallAPI", "Failed: " + throwable.toString())
                 }
             })
     }
 
     override fun onCleared() {
         compositeDisposable.clear()
+        Log.e("HomeViewModel", "Cleared")
         super.onCleared()
     }
 }
