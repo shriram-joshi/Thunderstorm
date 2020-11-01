@@ -9,8 +9,13 @@ class QueryParams {
         return this
     }
 
-    fun getResponseByCoordinates(lat: Double, lng: Double): QueryParams {
-        this.params = hashMapOf("lat" to lat.toString(), "lon" to lng.toString())
+    fun getResponseByCoordinates(lat: Float, lon: Float): QueryParams {
+        this.params = hashMapOf("lat" to lat.toString(), "lon" to lon.toString())
+        return this
+    }
+
+    fun excludeField(field: String): QueryParams {
+        this.params["exclude"] = field
         return this
     }
 

@@ -9,7 +9,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
-import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tec9ers.thunderstorm.R
@@ -25,12 +26,26 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
     private val homeViewModel: HomeViewModel by viewModels()
+
     @Inject
     lateinit var formatUtils: FormatUtils
+
     @Inject
     lateinit var hourlyForecastRecyclerViewAdapter: HourlyForecastRecyclerViewAdapter
+
     @Inject
     lateinit var dailyForecastAdapter: DailyForecastAdapter
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        homeViewModel.getOneCallAPIData().observe(viewLifecycleOwner) { oneCallAPIResponse ->
+            setData(oneCallAPIResponse)
+        }
+        return inflater.inflate(R.layout.fragment_home, container, false)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -45,14 +60,13 @@ class HomeFragment : Fragment() {
 
         // To prevent clipping of content across linearlayout rounded corners
         hourly_forecast_layout.clipToOutline = true
-
         hourly_forecast_rv.adapter = hourlyForecastRecyclerViewAdapter
         hourly_forecast_rv.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         hourly_forecast_rv.addItemDecoration(
             DividerItemDecoration(
                 context,
-                LinearLayoutManager.HORIZONTAL
+                DividerItemDecoration.HORIZONTAL
             )
         )
 
@@ -62,25 +76,24 @@ class HomeFragment : Fragment() {
         hourly_forecast_rv.addItemDecoration(
             DividerItemDecoration(
                 context,
-                LinearLayoutManager.HORIZONTAL
+                DividerItemDecoration.HORIZONTAL
             )
         )
 
+        val args: HomeFragmentArgs by navArgs()
+        with(args) {
+            if (lat != -200f && lon != -200f) {
+                homeViewModel.fetchOneCallAPIData(lat, lon)
+                main_card_title_tv.text = cityName
+            } else {
+                homeViewModel.fetchOneCallAPIData()
+            }
+        }
+
         main_card_title_tv.setOnClickListener {
-            NavHostFragment.findNavController(this).navigate(R.id.action_homeFragment_to_favCities)
+            HomeFragmentDirections.actionHomeToSearch()
+                .run { findNavController().navigate(this) }
         }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        homeViewModel.oneCallApiLivaData.observe(viewLifecycleOwner) { oneCallAPIResponse ->
-            setData(oneCallAPIResponse)
-        }
-
-        return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     private fun setData(oneCallAPIResponse: OneCallAPIResponse) {

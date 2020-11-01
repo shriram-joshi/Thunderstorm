@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tec9ers.thunderstorm.R
 import com.tec9ers.thunderstorm.utils.DataStoreUtils
@@ -33,8 +33,8 @@ class FavCities : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         floating_button.setOnClickListener {
-            NavHostFragment.findNavController(this)
-                .navigate(R.id.action_favCities_to_searchFragment)
+            FavCitiesDirections.actionSavedToSearch()
+                .run { findNavController().navigate(this) }
         }
         rv_fav_cities.adapter = adapter
         rv_fav_cities.layoutManager = LinearLayoutManager(requireActivity())

@@ -7,8 +7,12 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tec9ers.thunderstorm.R
+import com.tec9ers.thunderstorm.utils.ClickListener
+import com.tec9ers.thunderstorm.utils.RecyclerTouchListener
 import com.tec9ers.thunderstorm.view.adapter.CitiesSearchAdapter
 import com.tec9ers.thunderstorm.viewmodel.SearchFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,16 +28,46 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
+
     private val searchFragmentViewModel: SearchFragmentViewModel by viewModels()
     private val compositeDisposable = CompositeDisposable()
 
     @Inject
     lateinit var citiesSearchAdapter: CitiesSearchAdapter
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observableSearchView()
+        RecyclerTouchListener(
+            requireContext(), rv_cities_search,
+            object :
+                ClickListener {
+                override fun onClick(view: View, position: Int) {
+                    searchFragmentViewModel.fetchCityLocationLiveData(
+                        citiesSearchAdapter.getData()?.get(position)!!.links.cityItem.href
+                    )
+                }
+            }
+        )
         rv_cities_search.adapter = citiesSearchAdapter
         rv_cities_search.layoutManager = LinearLayoutManager(requireContext())
+        rv_cities_search.addItemDecoration(
+            DividerItemDecoration(
+                context,
+                DividerItemDecoration.VERTICAL
+            )
+        )
+
+        searchFragmentViewModel.getCityLocationLiveData().observe(
+            viewLifecycleOwner,
+            {
+                SearchFragmentDirections.actionResultToHome(
+                    it.location.latlon.latitude.toFloat(),
+                    it.location.latlon.longitude.toFloat(),
+                    it.full_name
+                ).run { findNavController().navigate(this) }
+            }
+        )
     }
 
     override fun onCreateView(
