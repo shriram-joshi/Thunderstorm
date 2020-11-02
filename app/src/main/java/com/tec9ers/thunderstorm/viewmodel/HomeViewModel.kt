@@ -45,7 +45,6 @@ class HomeViewModel @ViewModelInject constructor(private val repository: Reposit
 
     override fun onCleared() {
         compositeDisposable.clear()
-        Log.e("HomeViewModel", "Cleared")
         super.onCleared()
     }
 }

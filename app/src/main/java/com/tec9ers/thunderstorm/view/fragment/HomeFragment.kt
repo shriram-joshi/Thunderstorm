@@ -91,7 +91,7 @@ class HomeFragment : Fragment() {
         }
 
         main_card_title_tv.setOnClickListener {
-            HomeFragmentDirections.actionHomeToSearch()
+            HomeFragmentDirections.actionHomeToSearch(0)
                 .run { findNavController().navigate(this) }
         }
     }

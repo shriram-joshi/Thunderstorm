@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.tec9ers.thunderstorm.R
 import com.tec9ers.thunderstorm.model.CurrentWeatherResponse
@@ -46,8 +47,26 @@ class FavCitiesAdapter @Inject constructor(
             with(
                 itemView,
                 {
-                    tv_city_name.text = currentWeatherResponse.name
-                    tv_city_temp.text = format.formatTemp(currentWeatherResponse.main.temp.toDouble())
+                    city_name_tv.text = currentWeatherResponse.name
+                    city_current_temp_tv.text =
+                        format.formatTemp(currentWeatherResponse.main.temp.toDouble())
+                    city_max_temp_tv.text =
+                        format.formatTemp(currentWeatherResponse.main.tempMax.toDouble())
+                    city_max_temp_tv.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                        null,
+                        null,
+                        ContextCompat.getDrawable(context, R.drawable.ic_arrow_upward_24px),
+                        null
+                    )
+                    city_min_temp_tv.text =
+                        format.formatTemp(currentWeatherResponse.main.tempMin.toDouble())
+                    city_min_temp_tv.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                        null,
+                        null,
+                        ContextCompat.getDrawable(context, R.drawable.ic_arrow_downward_24px),
+                        null
+                    )
+                    weather_desc_tv.text = currentWeatherResponse.weather[0].description
                 }
             )
         }

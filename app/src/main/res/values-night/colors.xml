@@ -12,7 +12,7 @@
     <color name="header_app_name">@color/glaucous</color>
     <color name="header_app_name_shadow">@color/shadow_color_night</color>
     <color name="side_nav_background">@color/midnight_blue</color>
-    <color name="menu_item_selected_background">#7E57C2</color>
+    <color name="menu_item_selected_background">@color/glaucous</color>
     <color name="side_nav_menu_icon">@color/ivory</color>
-
+    <color name="fab_background">@color/glaucous</color>
 </resources>
