@@ -40,18 +40,25 @@
             app:enterAnim="@anim/fragment_fade_enter"
             app:popUpTo="@id/nav_home"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_search_to_saved"
+            app:destination="@id/nav_fav_cities"
+            app:popUpTo="@id/nav_fav_cities"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="origin"
+            app:argType="integer" />
     </fragment>
 
     <fragment
         android:id="@+id/nav_fav_cities"
-        android:name="com.tec9ers.thunderstorm.view.fragment.FavCities"
+        android:name="com.tec9ers.thunderstorm.view.fragment.FavCitiesFragment"
         android:label="fragment_fav_cities"
         tools:layout="@layout/fragment_fav_cities" >
         <action
             android:id="@+id/action_saved_to_search"
             app:destination="@id/nav_search"
-            app:enterAnim="@anim/fragment_fade_enter"
-            app:popUpTo="@id/nav_home" />
+            app:enterAnim="@anim/fragment_fade_enter" />
     </fragment>
 
 </navigation>

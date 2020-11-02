@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.tec9ers.thunderstorm.data.QueryParams
 import com.tec9ers.thunderstorm.data.Repository
 import com.tec9ers.thunderstorm.model.CurrentWeatherResponse
+import com.tec9ers.thunderstorm.model.SavedCity
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Observer
@@ -16,49 +17,49 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 
 class FavCitiesViewModel @ViewModelInject constructor(private val repository: Repository) :
     ViewModel() {
+
     private val compositeDisposable = CompositeDisposable()
-    private val _currentWeather: MutableLiveData<MutableList<CurrentWeatherResponse>> by lazy {
+    private val currentWeatherLiveData: MutableLiveData<MutableList<CurrentWeatherResponse>> by lazy {
         MutableLiveData<MutableList<CurrentWeatherResponse>>()
     }
 
-    fun getCurrentCitiesLiveData(citiesList: List<String>): LiveData<MutableList<CurrentWeatherResponse>> {
-        fetchCitiesData(citiesList)
-        return _currentWeather
+    fun getCurrentCitiesLiveData(): LiveData<MutableList<CurrentWeatherResponse>> {
+        return currentWeatherLiveData
     }
 
-    private fun fetchCitiesData(cityList: List<String>) {
+    fun fetchCitiesData(cityList: List<SavedCity>) {
         val currentWeatherResponseList = mutableListOf<CurrentWeatherResponse>()
         Observable.fromIterable(cityList)
             .flatMap { city ->
-                repository.getCurrentWeatherSingle(QueryParams().getResponseByCity(city))
-                    .toObservable()
-            }.subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                object : Observer<CurrentWeatherResponse> {
-                    override fun onSubscribe(disposable: Disposable?) {
-                        compositeDisposable.add(disposable)
-                    }
+                repository.getCurrentWeatherSingle(
+                    QueryParams().getResponseByCoordinates(city.lat, city.lon)
+                ).toObservable()
+            }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : Observer<CurrentWeatherResponse> {
 
-                    override fun onNext(currentWeatherResponse: CurrentWeatherResponse?) {
-                        if (currentWeatherResponse != null) {
-                            currentWeatherResponseList.add(currentWeatherResponse)
-                            _currentWeather.value = currentWeatherResponseList
-                        }
-                    }
+                override fun onSubscribe(disposable: Disposable?) {
+                    compositeDisposable.add(disposable)
+                }
 
-                    override fun onError(error: Throwable?) {
-                        // TODO handle error here
-                    }
-
-                    override fun onComplete() {
-                        // TODO handles on complete
+                override fun onNext(currentWeatherResponse: CurrentWeatherResponse?) {
+                    if (currentWeatherResponse != null) {
+                        currentWeatherResponseList.add(currentWeatherResponse)
+                        currentWeatherLiveData.value = currentWeatherResponseList
                     }
                 }
-            )
+
+                override fun onError(error: Throwable?) {
+                }
+
+                override fun onComplete() {
+                }
+            })
     }
 
     override fun onCleared() {
-        compositeDisposable.dispose()
+        compositeDisposable.clear()
         super.onCleared()
     }
 }

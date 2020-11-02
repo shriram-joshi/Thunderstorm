@@ -9,57 +9,55 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tec9ers.thunderstorm.R
-import com.tec9ers.thunderstorm.utils.DataStoreUtils
+import com.tec9ers.thunderstorm.model.SavedCity
 import com.tec9ers.thunderstorm.view.adapter.FavCitiesAdapter
 import com.tec9ers.thunderstorm.viewmodel.FavCitiesViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import io.realm.Realm
+import io.realm.kotlin.where
 import kotlinx.android.synthetic.main.fragment_fav_cities.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class FavCities : Fragment() {
+class FavCitiesFragment : Fragment() {
 
     private val viewModel: FavCitiesViewModel by viewModels()
 
-    // For Testing
-    private val citiesListFake = listOf("Pune", "Mumbai")
-
-    @Inject
-    lateinit var dataStoreUtils: DataStoreUtils
+    lateinit var realm: Realm
 
     @Inject
     lateinit var adapter: FavCitiesAdapter
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        floating_button.setOnClickListener {
-            FavCitiesDirections.actionSavedToSearch()
-                .run { findNavController().navigate(this) }
-        }
-        rv_fav_cities.adapter = adapter
-        rv_fav_cities.layoutManager = LinearLayoutManager(requireActivity())
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        /**dataStoreUtils.citiesFlow.asLiveData()
-         .observe(viewLifecycleOwner,
-         { citiesList -> setupRecyclerView(citiesListFake as MutableList<String>) })*/
-        setupRecyclerView(citiesListFake as MutableList<String>)
-        return inflater.inflate(R.layout.fragment_fav_cities, container, false)
-    }
-
-    private fun setupRecyclerView(citiesList: MutableList<String>) {
-
-        viewModel.getCurrentCitiesLiveData(citiesListFake)
+        viewModel.getCurrentCitiesLiveData()
             .observe(
                 viewLifecycleOwner,
                 { response ->
                     adapter.setData(response)
                 }
             )
+        return inflater.inflate(R.layout.fragment_fav_cities, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        floating_button.setOnClickListener {
+            FavCitiesFragmentDirections.actionSavedToSearch(1)
+                .run { findNavController().navigate(this) }
+        }
+        rv_fav_cities.adapter = adapter
+        rv_fav_cities.layoutManager = LinearLayoutManager(requireActivity())
+
+        realm = Realm.getDefaultInstance()
+        try {
+            val savedCities = realm.where<SavedCity>().findAll()
+            viewModel.fetchCitiesData(savedCities)
+        } finally {
+            realm.close()
+        }
     }
 }

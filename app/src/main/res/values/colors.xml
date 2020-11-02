@@ -36,6 +36,7 @@
     <color name="header_app_name">@color/blue_jeans</color>
     <color name="header_app_name_shadow">@color/shadow_color_notnight</color>
     <color name="side_nav_background">@color/honeydew</color>
-    <color name="menu_item_selected_background">#AABAAE</color>
+    <color name="menu_item_selected_background">@color/glaucous</color>
     <color name="side_nav_menu_icon">@color/eerie_black</color>
+    <color name="fab_background">@color/tart_orange</color>
 </resources>

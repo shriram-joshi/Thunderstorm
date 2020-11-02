@@ -1,5 +1,6 @@
 package com.tec9ers.thunderstorm.data
 
+import android.util.Log
 import com.tec9ers.thunderstorm.data.service.ApiService
 import com.tec9ers.thunderstorm.model.CurrentWeatherResponse
 import com.tec9ers.thunderstorm.model.ForecastResponse
@@ -10,6 +11,7 @@ import javax.inject.Inject
 class Repository @Inject constructor(private val apiService: ApiService) {
 
     fun getCurrentWeatherSingle(queryParams: QueryParams): Single<CurrentWeatherResponse> {
+        Log.d("Current Weather", "OK")
         return apiService.getCurrentWeather(queryParams.params)
     }
 

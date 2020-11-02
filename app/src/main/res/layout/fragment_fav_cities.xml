@@ -3,18 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".view.fragment.FavCities">
+    tools:context=".view.fragment.FavCitiesFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_fav_cities"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-<com.google.android.material.floatingactionbutton.FloatingActionButton
-    android:id="@+id/floating_button"
-    android:layout_alignParentEnd="true"
-    android:layout_margin="10dp"
-    android:layout_alignParentBottom="true"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floating_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        app:srcCompat="@drawable/ic_add_24px"
+        app:tint="@color/inverted_text"
+        app:backgroundTint="@color/fab_background"
+        app:borderWidth="0dp" />
+
 </RelativeLayout>
