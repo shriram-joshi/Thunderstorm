@@ -35,7 +35,7 @@ data class CurrentWeatherResponse(
     val id: Long,
 
     @SerializedName("name")
-    val name: String,
+    var name: String,
 
     @SerializedName("cod")
     val cod: Long,

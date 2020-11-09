@@ -14,6 +14,7 @@ import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlin.math.roundToInt
 
 class FavCitiesViewModel @ViewModelInject constructor(private val repository: Repository) :
     ViewModel() {
@@ -45,6 +46,12 @@ class FavCitiesViewModel @ViewModelInject constructor(private val repository: Re
 
                 override fun onNext(currentWeatherResponse: CurrentWeatherResponse?) {
                     if (currentWeatherResponse != null) {
+                        // Temporary solution for displaying correct city names
+                        for (city in cityList) {
+                            if (((city.lat * 100f).roundToInt() / 100f == currentWeatherResponse.coord.lat) && ((city.lon * 100f).roundToInt() / 100f == currentWeatherResponse.coord.lon)) {
+                                currentWeatherResponse.name = city.cityName
+                            }
+                        }
                         currentWeatherResponseList.add(currentWeatherResponse)
                         currentWeatherLiveData.value = currentWeatherResponseList
                     }

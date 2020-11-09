@@ -114,6 +114,9 @@ class SearchFragment : Fragment() {
                         citiesSearchAdapter.getData()?.get(position)!!.links.cityItem.href
                     )
                 }
+
+                override fun onLongPress(view: View, position: Int) {
+                }
             }
         )
     }

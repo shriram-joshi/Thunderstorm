@@ -47,6 +47,7 @@ class FavCitiesAdapter @Inject constructor(
             with(
                 itemView,
                 {
+                    this.tag = currentWeatherResponse.name
                     city_name_tv.text = currentWeatherResponse.name
                     city_current_temp_tv.text =
                         format.formatTemp(currentWeatherResponse.main.temp.toDouble())
