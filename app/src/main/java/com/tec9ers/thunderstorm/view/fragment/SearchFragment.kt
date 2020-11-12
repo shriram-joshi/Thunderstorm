@@ -81,6 +81,7 @@ class SearchFragment : Fragment() {
                                 .run { findNavController().navigate(this) }
                         } catch (exception: RealmPrimaryKeyConstraintException) {
                             Toast.makeText(context, "This city already exists in your favorites.", Toast.LENGTH_SHORT).show()
+                            realm.cancelTransaction()
                         } finally {
                             realm.close()
                         }
@@ -164,6 +165,7 @@ class SearchFragment : Fragment() {
     }
 
     override fun onDestroyView() {
+        realm.close()
         compositeDisposable.clear()
         super.onDestroyView()
     }
