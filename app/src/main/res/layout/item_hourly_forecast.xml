@@ -19,7 +19,7 @@
         tools:text="29°C" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/tv_forecast_hourly_thumbnail"
+        android:id="@+id/img_forecast_hourly_thumbnail"
         android:layout_width="36dp"
         android:layout_height="36dp"
         android:src="@drawable/ic_wb_sunny_rv_item" />

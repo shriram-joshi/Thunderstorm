@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.tec9ers.thunderstorm.R
 import com.tec9ers.thunderstorm.model.onecallapi.Hourly
 import com.tec9ers.thunderstorm.utils.FormatUtils
@@ -44,9 +45,14 @@ class HourlyForecastRecyclerViewAdapter @Inject constructor(
     class ForecastViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun setData(hourly: Hourly, format: FormatUtils) {
             with(itemView) {
-                tv_forecast_hourly_desc.text = format.capitalizeDescription(hourly.weather[0].description)
+                tv_forecast_hourly_desc.text =
+                    format.capitalizeDescription(hourly.weather[0].description)
                 tv_forecast_hourly_temp.text = format.formatTemp(hourly.temp)
                 tv_forecast_hourly_time.text = format.formatTime(hourly.dt)
+                img_forecast_hourly_thumbnail.load("http://openweathermap.org/img/wn/${hourly.weather[0].icon}@4x.png") {
+                    placeholder(R.drawable.ic_uv_black)
+                    crossfade(true)
+                }
             }
         }
     }
