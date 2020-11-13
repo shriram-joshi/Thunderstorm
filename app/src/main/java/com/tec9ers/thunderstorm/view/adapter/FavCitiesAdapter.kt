@@ -20,11 +20,20 @@ class FavCitiesAdapter @Inject constructor(
 ) :
     RecyclerView.Adapter<FavCitiesAdapter.FavCitiesViewHolder>() {
 
-    private var data: List<CurrentWeatherResponse>? = null
+    var data: MutableList<CurrentWeatherResponse>? = null
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
-    fun setData(data: List<CurrentWeatherResponse>) {
-        this.data = data
-        notifyDataSetChanged()
+    fun remove(position: Int) {
+        this.data?.removeAt(position)
+        notifyItemRemoved(position)
+    }
+
+    fun restoreItem(position: Int, itemData: CurrentWeatherResponse) {
+        data?.add(position, itemData)
+        notifyItemInserted(position)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavCitiesViewHolder {

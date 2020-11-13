@@ -1,5 +1,6 @@
 package com.tec9ers.thunderstorm.view.fragment
 
+import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.matteobattilana.weather.PrecipType
 import com.tec9ers.thunderstorm.R
 import com.tec9ers.thunderstorm.model.onecallapi.OneCallAPIResponse
 import com.tec9ers.thunderstorm.utils.FormatUtils
@@ -93,6 +95,14 @@ class HomeFragment : Fragment() {
         main_card_title_tv.setOnClickListener {
             HomeFragmentDirections.actionHomeToSearch(0)
                 .run { findNavController().navigate(this) }
+        }
+        weather_view.apply {
+            fadeOutPercent = 5F
+            setBackgroundColor(Color.parseColor("#0000FF"))
+            angle = 30
+            setWeatherData(PrecipType.RAIN)
+            emissionRate = 750f
+            speed = 2000
         }
     }
 
