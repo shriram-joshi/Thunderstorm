@@ -71,7 +71,6 @@ class HomeFragment : Fragment() {
                 DividerItemDecoration.HORIZONTAL
             )
         )
-
         daily_forecast_rv.adapter = dailyForecastAdapter
         daily_forecast_rv.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -92,6 +91,10 @@ class HomeFragment : Fragment() {
             }
         }
 
+        swipe_refresh_home.setOnRefreshListener {
+            homeViewModel.fetchOneCallAPIData()
+            swipe_refresh_home.isRefreshing = false
+        }
         main_card_title_tv.setOnClickListener {
             HomeFragmentDirections.actionHomeToSearch(0)
                 .run { findNavController().navigate(this) }
