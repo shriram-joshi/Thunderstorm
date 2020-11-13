@@ -13,7 +13,6 @@ import dagger.hilt.android.qualifiers.ActivityContext
 import kotlinx.android.synthetic.main.item_hourly_forecast.view.*
 import javax.inject.Inject
 
-@ActivityContext
 class HourlyForecastRecyclerViewAdapter @Inject constructor(
     @ActivityContext val context: Context,
     private val format: FormatUtils

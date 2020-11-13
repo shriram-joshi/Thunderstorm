@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.github.matteobattilana.weather.PrecipType
 import com.tec9ers.thunderstorm.R
 import com.tec9ers.thunderstorm.model.onecallapi.OneCallAPIResponse
@@ -52,34 +53,14 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Invert the gradient for the title textview (instead of creating a new drawable)
-        val gradientDrawable: GradientDrawable = ContextCompat.getDrawable(
-            requireContext(),
-            R.drawable.hourly_forecast
-        )?.mutate() as GradientDrawable
-        gradientDrawable.orientation = GradientDrawable.Orientation.BOTTOM_TOP
-        hourly_forecast_title_tv.background = gradientDrawable
-
+        setInvertedBG()
         // To prevent clipping of content across linearlayout rounded corners
         hourly_forecast_layout.clipToOutline = true
+
+        hourly_forecast_rv.setupRecyclerView()
         hourly_forecast_rv.adapter = hourlyForecastRecyclerViewAdapter
-        hourly_forecast_rv.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        hourly_forecast_rv.addItemDecoration(
-            DividerItemDecoration(
-                context,
-                DividerItemDecoration.HORIZONTAL
-            )
-        )
+        daily_forecast_rv.setupRecyclerView()
         daily_forecast_rv.adapter = dailyForecastAdapter
-        daily_forecast_rv.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        hourly_forecast_rv.addItemDecoration(
-            DividerItemDecoration(
-                context,
-                DividerItemDecoration.HORIZONTAL
-            )
-        )
 
         val args: HomeFragmentArgs by navArgs()
         with(args) {
@@ -126,5 +107,29 @@ class HomeFragment : Fragment() {
                 dailyForecastAdapter.setData(daily)
             }
         }
+    }
+
+    /**
+     * This Function Inverts the GradientDrawable and Sets it as a Background to the TitleTV
+     **/
+    private fun setInvertedBG() {
+
+        val gradientDrawable: GradientDrawable = ContextCompat.getDrawable(
+            requireContext(),
+            R.drawable.hourly_forecast
+        )?.mutate() as GradientDrawable
+        gradientDrawable.orientation = GradientDrawable.Orientation.BOTTOM_TOP
+        hourly_forecast_title_tv.background = gradientDrawable
+    }
+
+    private fun RecyclerView.setupRecyclerView() {
+        this.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        this.addItemDecoration(
+            DividerItemDecoration(
+                context,
+                DividerItemDecoration.HORIZONTAL
+            )
+        )
     }
 }
