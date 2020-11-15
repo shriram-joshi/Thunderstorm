@@ -1,6 +1,7 @@
 package com.tec9ers.thunderstorm.utils
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Service
 import android.content.Context
 import android.content.Intent
@@ -15,9 +16,9 @@ import androidx.core.app.ActivityCompat
 
 class LocationService : Service() {
     private lateinit var listener: LocationListener
-    private lateinit var locationManager: LocationManager
+    lateinit var locationManager: LocationManager
 
-    override fun onBind(p0: Intent?): IBinder? {
+    override fun onBind(intent: Intent?): IBinder? {
         return null
     }
 
@@ -27,8 +28,18 @@ class LocationService : Service() {
             override fun onLocationChanged(location: Location) {
                 val intent = Intent("location_update")
                 intent.putExtra("coordinates lat", location.latitude)
-                intent.putExtra("coordinates lon",location.longitude)
-                Toast.makeText(this@LocationService,"Broadcast Sent",Toast.LENGTH_SHORT).show()
+                intent.putExtra("coordinates lon", location.longitude)
+                Toast.makeText(this@LocationService, "Broadcast Sent", Toast.LENGTH_SHORT).show()
+                sendBroadcast(intent)
+            }
+
+            @SuppressLint("MissingPermission")
+            override fun onProviderEnabled(provider: String) {
+               val location = locationManager.getLastKnownLocation(provider)
+                val intent = Intent("location_update")
+                intent.putExtra("coordinates lat", location?.latitude)
+                intent.putExtra("coordinates lon", location?.longitude)
+                Toast.makeText(this@LocationService, "Broadcast Sent", Toast.LENGTH_SHORT).show()
                 sendBroadcast(intent)
             }
 
@@ -45,20 +56,19 @@ class LocationService : Service() {
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
+                    this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED
         ) {
-            Toast.makeText(this,"Permission Denied", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show()
             return
         }
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,3000,0f,listener);
-        Toast.makeText(this,"Permission Accepted", Toast.LENGTH_SHORT).show()
+        locationManager.requestLocationUpdates(LocationManager.PASSIVE_PROVIDER, 3000, 0f, listener).also { Toast.makeText(this, "Permission Accepted", Toast.LENGTH_SHORT).show() }
+
     }
 
     override fun onDestroy() {
         super.onDestroy()
         locationManager.removeUpdates(listener)
-
     }
 }

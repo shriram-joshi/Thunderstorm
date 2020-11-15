@@ -12,18 +12,19 @@ import com.tec9ers.thunderstorm.R
 object LocationUtils {
     val REQUEST_CODE = 1001
     val permission = Manifest.permission.ACCESS_FINE_LOCATION
-    fun checkPermissionStatus(activity: Activity):Boolean{
-        return (ContextCompat.checkSelfPermission(
+    fun checkPermissionStatus(activity: Activity): Boolean {
+        return (
+            ContextCompat.checkSelfPermission(
                 activity,
-                LocationUtils.permission
+                permission
             ) != PackageManager.PERMISSION_GRANTED
-        )
+            )
     }
 
     fun checkPermission(activity: Activity) {
         when {
             shouldShowRequestPermissionRationale(activity, permission) -> {
-                //Dialog Builder
+                // Dialog Builder
                 AlertDialog.Builder(activity).apply {
                     setTitle(R.string.permission_dialog_title)
                     setMessage(R.string.location_permission_body)
@@ -40,7 +41,6 @@ object LocationUtils {
                         p1.dismiss()
                     }
                 }.create().show()
-
             }
             else -> {
                 // Handle if user has been asked for Permission before
