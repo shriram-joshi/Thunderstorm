@@ -10,14 +10,14 @@ import androidx.core.content.ContextCompat
 import com.tec9ers.thunderstorm.R
 
 object LocationUtils {
-    val REQUEST_CODE = 1001
-    val permission = Manifest.permission.ACCESS_FINE_LOCATION
+    const val REQUEST_CODE = 1001
+    const val permission = Manifest.permission.ACCESS_FINE_LOCATION
     fun checkPermissionStatus(activity: Activity): Boolean {
         return (
             ContextCompat.checkSelfPermission(
                 activity,
                 permission
-            ) != PackageManager.PERMISSION_GRANTED
+            ) == PackageManager.PERMISSION_GRANTED
             )
     }
 
