@@ -30,7 +30,8 @@ class FavCitiesFragment : Fragment() {
 
     private val viewModel: FavCitiesViewModel by viewModels()
 
-    private lateinit var realm: Realm
+    @Inject
+    lateinit var realm: Realm
     private lateinit var realmResults: RealmResults<SavedCity>
 
     @Inject
@@ -58,12 +59,11 @@ class FavCitiesFragment : Fragment() {
         }
         rv_fav_cities.adapter = adapter
         rv_fav_cities.layoutManager = LinearLayoutManager(requireActivity())
-        swipeListener()
-        realm = Realm.getDefaultInstance()
         val savedCities = mutableListOf<SavedCity>()
         realmResults = realm.where<SavedCity>().findAll()
         savedCities.addAll(realm.copyFromRealm(realmResults))
         viewModel.fetchCitiesData(savedCities)
+
         realmResults.addChangeListener(
             RealmChangeListener<RealmResults<SavedCity>> {
                 savedCities.clear()
@@ -73,68 +73,7 @@ class FavCitiesFragment : Fragment() {
         )
     }
 
-    private fun swipeListener() {
-        var snackbar: Snackbar? = null
-        lateinit var deletedItem: CurrentWeatherResponse
-        val simpleItemTouchCallback: ItemTouchHelper.SimpleCallback = object :
-            ItemTouchHelper.SimpleCallback(
-                0,
-                ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
-            ) {
-            override fun onMove(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
-            ): Boolean {
-                return false
-            }
 
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, swipeDir: Int) {
-                val position = viewHolder.adapterPosition
-                snackbar?.dismiss()
-                snackbar =
-                    Snackbar.make(
-                        fav_cities_relative_layout,
-                        "Are you sure? ${viewHolder.itemView.tag}",
-                        Snackbar.LENGTH_LONG
-                    )
-                snackbar?.setAction(
-                    "UNDO"
-                ) {
-                    realm.cancelTransaction()
-                    // add Method to restore city here
-                    adapter.restoreItem(position, deletedItem)
-                }
-                val callback = object : Snackbar.Callback() {
-                    override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
-                        super.onDismissed(transientBottomBar, event)
-                        try {
-                            realm.commitTransaction()
-                        } catch (error: IllegalStateException) {
-                            error.printStackTrace()
-                        }
-                    }
-
-                    override fun onShown(sb: Snackbar?) {
-                        super.onShown(sb)
-                        deletedItem = adapter.data?.get(position)!!
-                        adapter.remove(position)
-                        realm.beginTransaction()
-                        realm.where<SavedCity>().equalTo(
-                            "cityName",
-                            viewHolder.itemView.tag.toString()
-                        )
-                            .findFirst()
-                            ?.deleteFromRealm()
-                    }
-                }
-                snackbar?.addCallback(callback)
-                snackbar?.show()
-            }
-        }
-        val itemTouchHelper = ItemTouchHelper(simpleItemTouchCallback)
-        itemTouchHelper.attachToRecyclerView(rv_fav_cities)
-    }
 
     override fun onDestroy() {
         super.onDestroy()
