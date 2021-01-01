@@ -14,5 +14,9 @@
     <string name="about_us">About Us</string>
     <string name="version">v alpha-1.0</string>
     <string name="app_icon">App icon</string>
+    <string name="permission_dialog_title">Permission Needed</string>
+    <string name="location_permission_body">We need access to your device location to make your experience smooth</string>
+    <string name="permission_positive_button">Grant Permission</string>
+    <string name="permission_negative_button">cancel</string>
 
 </resources>

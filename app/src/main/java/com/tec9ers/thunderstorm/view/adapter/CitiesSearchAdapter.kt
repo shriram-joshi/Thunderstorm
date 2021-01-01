@@ -11,7 +11,6 @@ import dagger.hilt.android.qualifiers.ActivityContext
 import kotlinx.android.synthetic.main.item_city_search.view.*
 import javax.inject.Inject
 
-@ActivityContext
 class CitiesSearchAdapter @Inject constructor(
     @ActivityContext val context: Context,
 ) :
